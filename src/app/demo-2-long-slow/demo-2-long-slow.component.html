@@ -1,5 +1,10 @@
+<h2>Observable autocomplete, long slow list</h2>
+<p>(Also illustrated required field.)</p>
+
 <form class="example-form">
-  <div>Result: {{ours.value}}</div>
+  <div>Value: {{ ours.value | json }}
+    Touched: {{ ours.touched | json }}
+    Errors: {{ ours.errors | json }}</div>
   <div>
     <input #manual type="text" placeholder="Change Our Value" (change)="ours.setValue(manual.value)">
   </div>
@@ -10,4 +15,10 @@
     [displayValueFn]="valueToDisplay"
     [searchFn]="searchFn"></obs-autocomplete>
   </div>
+
+  <p>Example required field:</p>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Required field here" [formControl]="reqExample">
+  </mat-form-field>
+
 </form>

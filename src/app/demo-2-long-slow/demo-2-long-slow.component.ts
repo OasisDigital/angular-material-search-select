@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
@@ -13,7 +13,9 @@ import { OptionEntry } from '../obs-autocomplete/';
   templateUrl: './demo-2-long-slow.component.html'
 })
 export class Demo2LongSlowComponent {
-  ours: FormControl = new FormControl();
+  ours = new FormControl(undefined, [Validators.required]);
+  reqExample = new FormControl(undefined, [Validators.required]);
+
   searchFn = this.search.bind(this);
 
   valueToDisplay(value: any): Observable<OptionEntry> {
@@ -36,7 +38,7 @@ export class Demo2LongSlowComponent {
         .map(option => ({
           value: option.id,
           display: option.name,
-          match: option.display === term
+          match: option.name === term
         }));
     return of(result).pipe(delayWhen(_event =>
       timer(Math.random() * 1000 + 400)

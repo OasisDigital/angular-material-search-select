@@ -38,6 +38,12 @@ import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
     position: absolute;
     right: 5px;
   }
+  .ng-invalid.ng-touched > .obs-mat-container {
+    color: #f44336 !important;
+  }
+  .ng-invalid.ng-touched > .obs-mat-container label {
+    color: #f44336 !important;
+  }
   `],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -98,6 +104,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   }
 
   blur() {
+    this.onTouched();
     if (this.selectedValueSub) {
       this.selectedValueSub.unsubscribe();
     }
@@ -108,7 +115,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
 
   private checkAndPropagate(value: any) {
     if (value !== this.outsideValue) {
-      this.propagateChange(value);
+      this.onChange(value);
       this.outsideValue = value;
     }
   }
@@ -123,10 +130,11 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   }
 
   registerOnChange(fn: any): void {
-    this.propagateChange = fn;
+    this.onChange = fn;
   }
 
-  registerOnTouched(_fn: any): void {
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {
@@ -143,6 +151,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
     }
   }
 
-  propagateChange = (_: any) => { };
+  onChange = (_: any) => { };
+  onTouched = () => { };
 
 }

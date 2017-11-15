@@ -1,5 +1,6 @@
 # TODO first
 
+* Plunkr, which will verify the bundling is OK
 * Multicolumn capability! Ideas:
   * Style the existing elements as a table?
   * Hide OptionEntry inside the component?
@@ -7,7 +8,6 @@
 
 # TODO next
 
-* Plunkr
 * Example app demo online
 * Settable width and height, maybe grab class via ViewChild and push in style
 * Support swapping out the observable function live, without disturbing or
@@ -18,4 +18,3 @@
 
 * E2E tests to verify behavior from a user PoV
 * Demo that calls a backend service, json server
-* Verify packaging and publishing to NPM really works

@@ -1,5 +1,9 @@
+<h2>Observable autocomplete, simple fast list</h2>
+
 <form class="example-form">
-  <div>Result: {{ours.value}}</div>
+  <div>Value: {{ ours.value | json }}
+      Touched: {{ ours.touched | json }}
+      Errors: {{ ours.errors | json }}</div>
   <div>
     <input #manual type="text" placeholder="Change Our Value" (change)="ours.setValue(manual.value)">
   </div>
