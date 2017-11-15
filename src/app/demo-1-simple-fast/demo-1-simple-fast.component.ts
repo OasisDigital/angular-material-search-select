@@ -26,6 +26,9 @@ export class Demo1SimpleFastComponent {
   }
 
   valueToDisplay(value: any): Observable<OptionEntry> {
+    if (value === '333') {
+      return of(undefined);
+    }
     const display = value ? value + '!' : '';
     return of({
       display,
@@ -37,6 +40,9 @@ export class Demo1SimpleFastComponent {
   search(term: string): Observable<OptionEntry[]> {
     if (term === 'error') {
       return _throw('testing');
+    }
+    if (typeof term !== 'string') {
+      term = '';
     }
     return of(this.options
       .filter(option => option.display.toLowerCase().indexOf(term.toLowerCase()) >= 0)

@@ -51,7 +51,7 @@ import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   @Input() placeholder: string;
   @Input() debounceTime = 50;
-  @Input() displayValueFn: (x: any) => Observable<string> = of;
+  @Input() displayValueFn: (x: any) => Observable<OptionEntry | undefined> = of;
   searchControl: FormControl = new FormControl();
   options: Observable<SearchResult>;
   incomingValues = new Subject<any>();
@@ -121,7 +121,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   }
 
   displayWith(value: OptionEntry): string {
-    return value.display;
+    return value ? value.display : '';
   }
 
   writeValue(obj: any): void {
