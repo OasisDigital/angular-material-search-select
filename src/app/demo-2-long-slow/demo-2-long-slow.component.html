@@ -1,0 +1,13 @@
+<form class="example-form">
+  <div>Result: {{ours.value}}</div>
+  <div>
+    <input #manual type="text" placeholder="Change Our Value" (change)="ours.setValue(manual.value)">
+  </div>
+  <div style="padding: 12px; border: 1px solid">
+    <obs-autocomplete
+    placeholder="Company"
+    [formControl]="ours"
+    [displayValueFn]="valueToDisplay"
+    [searchFn]="searchFn"></obs-autocomplete>
+  </div>
+</form>

@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/ng-packagr/package.schema.json",
+  "lib": {
+    "entryFile": "src/app/obs-autocomplete/index.ts",
+    "externals": {
+      "@angular/material": "ng.material"
+    }
+  }
+}

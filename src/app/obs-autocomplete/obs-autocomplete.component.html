@@ -1,0 +1,25 @@
+<mat-form-field class="obs-mat-container">
+  <mat-spinner class="obs-mat-spinner" *ngIf="(options | async) == undefined" [diameter]="20" [strokeWidth]="5"></mat-spinner>
+  <input
+      type="text"
+      [placeholder]="placeholder"
+      aria-label="Number"
+      spellcheck="false"
+      matInput
+      [formControl]="searchControl"
+      #input
+      (blur)="blur()"
+      (focus)="input.select(); focus()"
+      [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith" class="bigger-mat-ac">
+    <ng-container *ngIf="options | async as result">
+      <ng-container *ngIf="!result.msg">
+        <mat-option *ngFor="let option of result" [value]="option">
+          {{ option.display }}
+        </mat-option>
+      </ng-container>
+    </ng-container>
+  </mat-autocomplete>
+  <b *ngIf="(options | async)?.msg">Please handle errors in host application</b>
+
+</mat-form-field>

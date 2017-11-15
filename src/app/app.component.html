@@ -1,0 +1,28 @@
+<div class="nav">
+
+  <ul>
+    <li routerLinkActive="green-background">
+      <a [routerLink]="['/sample']">Plain AM example</a>
+    </li>
+    -
+    <li routerLinkActive="green-background">
+      <a [routerLink]="['/simple']">Simple OA</a>
+    </li>
+    -
+    <li routerLinkActive="green-background">
+      <a [routerLink]="['/long']">Long Slow OA</a>
+    </li>
+    -
+    <li routerLinkActive="green-background">
+      <a [routerLink]="['/real']">Real API OA</a>
+    </li>
+    -
+    <li routerLinkActive="green-background">
+      <a [routerLink]="['/cascade']">Cascading OAs</a>
+    </li>
+  </ul>
+</div>
+
+<hr>
+
+<router-outlet></router-outlet>
