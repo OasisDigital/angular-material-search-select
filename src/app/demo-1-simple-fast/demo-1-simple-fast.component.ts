@@ -22,7 +22,7 @@ export class Demo1SimpleFastComponent {
 
   constructor() {
     this.disableMe.valueChanges.subscribe(dis =>
-      dis ? this.ours.disable() : this.ours.enable())
+      dis ? this.ours.disable() : this.ours.enable());
   }
 
   valueToDisplay(value: any): Observable<OptionEntry> {
@@ -45,5 +45,4 @@ export class Demo1SimpleFastComponent {
       timer(Math.random() * 300 + 100)
     ));
   }
-
 }

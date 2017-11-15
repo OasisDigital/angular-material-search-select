@@ -8,6 +8,12 @@ import { timer } from 'rxjs/observable/timer';
 
 import { OptionEntry } from '../obs-autocomplete/';
 
+declare global {
+  interface Window {
+    testData: any;
+  }
+}
+
 @Component({
   selector: 'obs-demo-2-long-slow',
   templateUrl: './demo-2-long-slow.component.html'
@@ -32,10 +38,10 @@ export class Demo2LongSlowComponent {
       return _throw('testing');
     }
     const result =
-      window['testData'].companies
-        .filter(option => option.name.toLowerCase().indexOf(term.toLowerCase()) >= 0)
+      window.testData.companies
+        .filter((option: any) => option.name.toLowerCase().indexOf(term.toLowerCase()) >= 0)
         .slice(0, 200)
-        .map(option => ({
+        .map((option: any) => ({
           value: option.id,
           display: option.name,
           match: option.name === term
