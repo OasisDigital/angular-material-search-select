@@ -119,10 +119,9 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   }
 
   private checkAndPropagate(value: any) {
-    console.log("save", value);
     if (value !== this.outsideValue) {
-      this.onChange(value);
       this.outsideValue = value;
+      this.onChange(value);
     }
   }
 

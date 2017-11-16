@@ -14,7 +14,9 @@
   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith" class="bigger-mat-ac">
     <ng-container *ngIf="options | async as result">
       <ng-container *ngIf="!result.msg">
-        <mat-option *ngFor="let option of result" [value]="option">
+        <mat-option *ngFor="let option of result"
+          [value]="option"
+          [matTooltip]="option.tip">
           {{ option.display }}
         </mat-option>
       </ng-container>

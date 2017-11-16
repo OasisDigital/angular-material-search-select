@@ -60,6 +60,7 @@ export class Demo2LongSlowComponent {
         .map((company: any) => ({
           value: company.id,
           display: company.name,
+          tip: 'But is this really ' + company.name + '?',
           match: company.name === term
         }));
       return of(result).pipe(

@@ -7,7 +7,8 @@ import {
   MatAutocompleteModule,
   MatFormFieldModule,
   MatInputModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatTooltipModule
 } from '@angular/material';
 
 import { AutocompleteComponent } from './obs-autocomplete.component';
@@ -20,6 +21,7 @@ import { AutocompleteComponent } from './obs-autocomplete.component';
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
     FormsModule,
     ReactiveFormsModule
   ],

@@ -4,6 +4,7 @@ export interface OptionEntry {
   display: string;
   value: any;
   match: boolean;
+  tip?: string;
 }
 
 export interface ErrorEntry {
