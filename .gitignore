@@ -43,3 +43,4 @@ Thumbs.db
 
 db.json
 .ng_pkg_build
+dist-npm

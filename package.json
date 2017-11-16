@@ -1,13 +1,24 @@
 {
   "name": "angular-material-obs-autocomplete",
   "version": "0.9.5",
+  "author": "Kyle Cordes <kyle.cordes@oasisdigital.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://git@github.com:OasisDigital/angular-material-obs-autocomplete.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OasisDigital/angular-material-obs-autocomplete/issuess"
+  },
+  "homepage": "https://github.com/OasisDigital/angular-material-obs-autocomplete",
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",
     "json": "json-server db.json",
     "start": "npm-run-all generate --parallel serve json",
-    "build-demo": "ng build",
+    "build-demo": "ng build --prod --base-href /angular-material-obs-autocomplete/",
+    "gh-pages": "gh-pages -d dist",
+    "deploy-demo": "run-s build-demo gh-pages",
     "packagr": "ng-packagr -p ng-package.json",
     "streamline": "ts-node streamline_dist_package",
     "build": "run-s packagr streamline",
@@ -48,6 +59,7 @@
     "codelyzer": "^4.0.1",
     "core-js": "^2.4.1",
     "faker": "^4.1.0",
+    "gh-pages": "^1.0.0",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.1.0",
     "json-server": "^0.12.1",
