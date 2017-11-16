@@ -3,8 +3,9 @@
 * Doc component
 * Blitz demo
 * Prettier demo, use more Material
-* Ditch json-server, not useful for a hosted static demo anyway
-* Server side search demo
+* Server side search demo - call backend service somewhere
+  * MS Northwind API
+  * https://github.com/StefH/angular-odata-es5
 * Settings-fiddle page
 * Demo which cascades 3 of these components
 * Multicolumn capability! Ideas:
@@ -19,4 +20,3 @@
   angular material auto complete
 * Settable width and height, maybe grab class via ViewChild and push in style
 * E2E tests to verify behavior from a user PoV
-* Demo that calls a backend service, json server

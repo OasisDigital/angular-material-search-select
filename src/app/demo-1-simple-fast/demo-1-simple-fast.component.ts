@@ -27,7 +27,7 @@ export class Demo1SimpleFastComponent {
 
   valueToDisplay(value: any): Observable<OptionEntry> {
     if (value === '333') {
-      return of(undefined);
+      return of(null);
     }
     const display = value ? value + '!' : '';
     return of({

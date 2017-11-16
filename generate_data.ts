@@ -19,8 +19,6 @@ const data = {
 
 const json = JSON.stringify(data, undefined, 2);
 
-fs.writeFileSync('db.json', json);
-
 const fileContents = `
 // Generated data
 

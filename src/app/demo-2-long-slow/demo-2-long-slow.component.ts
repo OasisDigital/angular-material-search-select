@@ -21,8 +21,8 @@ const companies = window.testData.companies;
   templateUrl: './demo-2-long-slow.component.html'
 })
 export class Demo2LongSlowComponent {
-  ours = new FormControl(undefined, [Validators.required]);
-  reqExample = new FormControl(undefined, [Validators.required]);
+  ours = new FormControl(null, [Validators.required]);
+  reqExample = new FormControl(null, [Validators.required]);
   companyLimit = 10000;
   searchFn: any;
 
@@ -44,7 +44,7 @@ export class Demo2LongSlowComponent {
         match: true
       });
     }
-    return of(undefined);
+    return of(null);
   }
 
   makeSearchFn(n: number) {

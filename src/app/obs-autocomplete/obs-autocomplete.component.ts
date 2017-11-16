@@ -84,7 +84,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
     ).pipe(
       switchMap(([term, fn]) => fn(term).pipe(
         catchError(_err => of({ msg: 'Error ' + _err })),
-        startWith(undefined)
+        startWith(null)
       )),
       publishReplay(1),
       refCount()
