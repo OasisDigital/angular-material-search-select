@@ -2,11 +2,13 @@ import { Component, Input, forwardRef, OnDestroy, ViewEncapsulation, ChangeDetec
 import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { of } from 'rxjs/observable/of';
 import { timer } from 'rxjs/observable/timer';
-import { switchMap, startWith, catchError, map, filter, debounce, take } from 'rxjs/operators';
+import { combineLatest } from 'rxjs/observable/combineLatest';
+import { switchMap, startWith, catchError, map, filter, debounce, take, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-import { OptionEntry, SearchResult } from './types';
+import { OptionEntry, SearchResult, SearchFn } from './types';
 import { publishReplay } from 'rxjs/operators/publishReplay';
 import { refCount } from 'rxjs/operators/refCount';
 import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
@@ -52,51 +54,55 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   @Input() placeholder: string;
   @Input() debounceTime = 50;
   @Input() displayValueFn: (x: any) => Observable<OptionEntry | undefined> = of;
-  searchControl: FormControl = new FormControl();
+  searchControl = new FormControl();
   options: Observable<SearchResult>;
   incomingValues = new Subject<any>();
+  incomingSearchFn = new BehaviorSubject<SearchFn>(() => of([]));
   private incomingValuesSub: Subscription;
   private outsideValue: any;
   private selectedValueSub: Subscription;
   private selectedValue: Observable<any>;
 
-  @Input() searchFn: (x: string) => Observable<OptionEntry[]> = _s => of([]);
+  @Input() set searchFn(f: SearchFn) {
+    if (f) {
+      this.incomingSearchFn.next(f);
+    }
+  }
 
   constructor() {
-    const searchResult = this.searchControl.valueChanges.pipe(
-      startWith(''),
+    const termValues = this.searchControl.valueChanges.pipe(
+      startWith(this.searchControl.value),
       debounce(_x => timer(this.debounceTime)),
       // Typing into input sends simple strings,
       // selecting from Material Option list provides objects
-      map(v => (typeof v === 'object') ? (v as OptionEntry).display : v),
+      map(v => v && (typeof v === 'object') ? (v as OptionEntry).display : v)
+    );
 
-      switchMap(v => {
-        return this.searchFn(v).pipe(
-          catchError(_err => of({ msg: 'You typed the secret key' })),
-          startWith(undefined)
-        );
-      }),
+    const searchResult = combineLatest(
+      termValues,
+      this.incomingSearchFn,
+    ).pipe(
+      switchMap(([term, fn]) => fn(term).pipe(
+        catchError(_err => of({ msg: 'Error ' + _err })),
+        startWith(undefined)
+      )),
       publishReplay(1),
       refCount()
-    );
+      );
+
     this.options = searchResult;
     this.selectedValue = searchResult.pipe(
       filter(results => Array.isArray(results)),
       map((results: OptionEntry[]) => {
         const entry = results.find(option => option.match);
-        if (entry) {
-          return entry.value;
-        }
+        return entry && entry.value;
       }),
-      distinctUntilChanged(),
+      distinctUntilChanged()
     );
 
-    this.incomingValuesSub = this.incomingValues.pipe(
-      switchMap(incomingVal => this.displayValueFn(incomingVal))
-    )
-      .subscribe(displayVal => {
-        this.searchControl.setValue(displayVal);
-      });
+    this.incomingValuesSub = this.incomingValues
+      .pipe(switchMap(value => this.displayValueFn(value)))
+      .subscribe(value => this.searchControl.setValue(value));
   }
 
   focus() {
@@ -108,12 +114,12 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
     if (this.selectedValueSub) {
       this.selectedValueSub.unsubscribe();
     }
-    setTimeout(() => {
-      this.selectedValue.pipe(take(1)).subscribe(this.checkAndPropagate.bind(this));
-    });
+    setTimeout(() =>
+      this.selectedValue.pipe(take(1)).subscribe(this.checkAndPropagate.bind(this)));
   }
 
   private checkAndPropagate(value: any) {
+    console.log("save", value);
     if (value !== this.outsideValue) {
       this.onChange(value);
       this.outsideValue = value;
@@ -153,5 +159,4 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
 
   onChange = (_: any) => { };
   onTouched = () => { };
-
 }

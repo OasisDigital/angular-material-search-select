@@ -41,11 +41,9 @@ export class Demo1SimpleFastComponent {
     if (term === 'error') {
       return _throw('testing');
     }
-    if (typeof term !== 'string') {
-      term = '';
-    }
+    const lowerTerm = typeof term === 'string' ? term.toLowerCase() : '';
     return of(this.options
-      .filter(option => option.display.toLowerCase().indexOf(term.toLowerCase()) >= 0)
+      .filter(option => option.display.toLowerCase().indexOf(lowerTerm) >= 0)
       .map(option => ({ ...option, match: option.display === term }))
     ).pipe(delayWhen(_event =>
       timer(Math.random() * 300 + 100)

@@ -1,6 +1,6 @@
 {
   "name": "angular-material-obs-autocomplete",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -18,12 +18,12 @@
   },
   "private": true,
   "peerDependencies": {
-    "@angular/core": "^5.0.1",
-    "@angular/forms": "^5.0.1",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
     "@angular/material": "^5.0.0-rc0",
     "core-js": "^2.4.1",
-    "rxjs": "^5.5.2",
-    "zone.js": "^0.8.14"
+    "rxjs": "^5.5.0",
+    "zone.js": "^0.8.11"
   },
   "devDependencies": {
     "@angular/animations": "^5.0.1",

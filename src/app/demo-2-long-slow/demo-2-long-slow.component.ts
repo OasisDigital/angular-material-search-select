@@ -14,6 +14,8 @@ declare global {
   }
 }
 
+const companies = window.testData.companies;
+
 @Component({
   selector: 'obs-demo-2-long-slow',
   templateUrl: './demo-2-long-slow.component.html'
@@ -21,33 +23,47 @@ declare global {
 export class Demo2LongSlowComponent {
   ours = new FormControl(undefined, [Validators.required]);
   reqExample = new FormControl(undefined, [Validators.required]);
+  companyLimit = 10000;
+  searchFn: any;
 
-  searchFn = this.search.bind(this);
-
-  valueToDisplay(value: any): Observable<OptionEntry> {
-    const display = value ? value + '!' : '';
-    return of({
-      display,
-      match: true,
-      value
-    });
+  constructor() {
+    this.searchFn = this.makeSearchFn(this.companyLimit);
   }
 
-  search(term: string): Observable<OptionEntry[]> {
-    if (term === 'error') {
-      return _throw('testing');
+  swapSources() {
+    this.companyLimit = this.companyLimit === 10000 ? 5 : 10000;
+    this.searchFn = this.makeSearchFn(this.companyLimit);
+  }
+
+  valueToDisplay(value: any): Observable<OptionEntry> {
+    const company = companies.find((c: any) => c.id === value);
+    if (company) {
+      return of({
+        value: company.id,
+        display: company.name,
+        match: true
+      });
     }
-    const result =
-      window.testData.companies
-        .filter((option: any) => option.name.toLowerCase().indexOf(term.toLowerCase()) >= 0)
+    return of(undefined);
+  }
+
+  makeSearchFn(n: number) {
+    const companiesToSearch = companies.slice(0, n);
+    return (term: string): Observable<OptionEntry[]> => {
+      if (term === 'error') {
+        return _throw('testing');
+      }
+      const lowerTerm = typeof term === 'string' ? term.toLowerCase() : '';
+      const result = companiesToSearch
+        .filter((c: any) => c.name.toLowerCase().indexOf(lowerTerm) >= 0)
         .slice(0, 200)
-        .map((option: any) => ({
-          value: option.id,
-          display: option.name,
-          match: option.name === term
+        .map((company: any) => ({
+          value: company.id,
+          display: company.name,
+          match: company.name === term
         }));
-    return of(result).pipe(delayWhen(_event =>
-      timer(Math.random() * 1000 + 400)
-    ));
+      return of(result).pipe(
+        delayWhen(_event => timer(Math.random() * 1000 + 400)));
+    };
   }
 }

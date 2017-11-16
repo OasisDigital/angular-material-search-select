@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+
 export interface OptionEntry {
   display: string;
   value: any;
@@ -9,3 +11,5 @@ export interface ErrorEntry {
 }
 
 export type SearchResult = OptionEntry[] | ErrorEntry;
+
+export type SearchFn = (x: string) => Observable<OptionEntry[]>;

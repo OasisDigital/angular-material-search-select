@@ -20,6 +20,6 @@
       </ng-container>
     </ng-container>
   </mat-autocomplete>
-  <b *ngIf="(options | async)?.msg">Please handle errors in host application</b>
+  <b>{{ (options | async)?.msg }}</b>
 
 </mat-form-field>
