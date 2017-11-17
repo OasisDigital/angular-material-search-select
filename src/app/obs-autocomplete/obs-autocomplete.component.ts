@@ -99,7 +99,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
       filter(results => Array.isArray(results)),
       map((results: OptionEntry[]) => {
         const entry = results.find(option => option.match);
-        return entry && entry.value;
+        return entry && entry.value || null;
       }),
       distinctUntilChanged()
     );

@@ -1,7 +1,7 @@
 <h2>Observable autocomplete, simple fast list</h2>
 
 <form class="example-form">
-  <div>Value: {{ ours.value | json }}
+  <div>Value: {{ { value: ours.value } | json }}
       Touched: {{ ours.touched | json }}
       Errors: {{ ours.errors | json }}</div>
   <div>

@@ -2,7 +2,7 @@
 <p>(Also illustrated required field.)</p>
 
 <form class="example-form">
-  <div>Value: {{ ours.value | json }}
+  <div>Value: {{{ value: ours.value } | json }}
     Touched: {{ ours.touched | json }}
     Errors: {{ ours.errors | json }}</div>
   <div>
