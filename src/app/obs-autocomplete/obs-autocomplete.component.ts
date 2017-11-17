@@ -120,6 +120,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   }
 
   private checkAndPropagate(value: any) {
+    // Only send a change if there really is one.
     if (value !== this.outsideValue) {
       this.outsideValue = value;
       this.onChange(value);
@@ -131,8 +132,11 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   }
 
   writeValue(obj: any): void {
-    this.outsideValue = obj;
-    this.incomingValues.next(obj);
+    // Angular sometimes writes a value that didn't really change.
+    if (obj !== this.outsideValue) {
+      this.outsideValue = obj;
+      this.incomingValues.next(obj);
+    }
   }
 
   registerOnChange(fn: any): void {

@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
-import { delayWhen } from 'rxjs/operators';
+import { delayWhen, tap } from 'rxjs/operators';
 import { timer } from 'rxjs/observable/timer';
 
 import { OptionEntry } from '../obs-autocomplete/';
@@ -64,6 +64,7 @@ export class Demo2LongSlowComponent {
           match: company.name === term
         }));
       return of(result).pipe(
+        tap(x => console.log('search result', term, x)),
         delayWhen(_event => timer(Math.random() * 1000 + 400)));
     };
   }
