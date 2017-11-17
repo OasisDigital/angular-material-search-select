@@ -6,10 +6,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { of } from 'rxjs/observable/of';
 import { timer } from 'rxjs/observable/timer';
 import { combineLatest } from 'rxjs/observable/combineLatest';
-import { switchMap, startWith, catchError, map, filter, debounce, take, tap } from 'rxjs/operators';
+import { switchMap, startWith, catchError, map, filter, debounce, take, tap, refCount } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 import { publishReplay } from 'rxjs/operators/publishReplay';
-import { refCount } from 'rxjs/operators/refCount';
 import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 
 import { OptionEntry, SearchResult, SearchFn, DisplayValueFn } from './types';
@@ -17,6 +16,11 @@ import { OptionEntry, SearchResult, SearchFn, DisplayValueFn } from './types';
 // The CSS approach below is the documented "solution":
 // https://github.com/angular/material2/issues/3810
 // https://github.com/angular/material2/pull/7176
+
+// To set the width, style the first class something like this:
+// width: 400px;
+// max-width: 400px !important;
+// ... need to figure out how to set the number programmaticlly.
 
 @Component({
   selector: 'obs-autocomplete',
@@ -31,8 +35,6 @@ import { OptionEntry, SearchResult, SearchFn, DisplayValueFn } from './types';
   styles: [`
   .bigger-mat-ac.mat-autocomplete-panel {
      max-height: 500px !important;
-     width: 400px;
-     max-width: 400px !important;
   }
   .obs-mat-container {
     position: relative;
@@ -53,7 +55,8 @@ import { OptionEntry, SearchResult, SearchFn, DisplayValueFn } from './types';
 })
 export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   @Input() placeholder: string;
-  @Input() debounceTime = 50;
+  @Input() debounceTime = 100;
+  @Input() width = '';
   @Input() displayValueFn: DisplayValueFn = of;
   searchControl = new FormControl();
   options: Observable<SearchResult>;

@@ -1,4 +1,4 @@
-<mat-form-field class="obs-mat-container">
+<mat-form-field class="obs-mat-container" [style.width]="width">
   <mat-spinner class="obs-mat-spinner" *ngIf="(options | async) == undefined" [diameter]="20" [strokeWidth]="5"></mat-spinner>
   <input
       type="text"
