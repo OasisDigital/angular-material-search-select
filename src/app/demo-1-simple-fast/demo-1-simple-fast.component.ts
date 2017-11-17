@@ -25,7 +25,7 @@ export class Demo1SimpleFastComponent {
       dis ? this.ours.disable() : this.ours.enable());
   }
 
-  valueToDisplay(value: any): Observable<OptionEntry> {
+  valueToDisplay(value: any): Observable<OptionEntry | null> {
     if (value === '333') {
       return of(null);
     }

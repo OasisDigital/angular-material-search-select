@@ -35,7 +35,7 @@ export class Demo2LongSlowComponent {
     this.searchFn = this.makeSearchFn(this.companyLimit);
   }
 
-  valueToDisplay(value: any): Observable<OptionEntry> {
+  valueToDisplay(value: any): Observable<OptionEntry | null> {
     const company = companies.find((c: any) => c.id === value);
     if (company) {
       return of({

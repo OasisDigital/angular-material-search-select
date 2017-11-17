@@ -13,4 +13,5 @@ export interface ErrorEntry {
 
 export type SearchResult = OptionEntry[] | ErrorEntry;
 
+export type DisplayValueFn = (x: any) => Observable<OptionEntry | null>;
 export type SearchFn = (x: string) => Observable<OptionEntry[]>;

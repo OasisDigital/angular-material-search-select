@@ -8,10 +8,11 @@ import { timer } from 'rxjs/observable/timer';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { switchMap, startWith, catchError, map, filter, debounce, take, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-import { OptionEntry, SearchResult, SearchFn } from './types';
 import { publishReplay } from 'rxjs/operators/publishReplay';
 import { refCount } from 'rxjs/operators/refCount';
 import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
+
+import { OptionEntry, SearchResult, SearchFn, DisplayValueFn } from './types';
 
 // The CSS approach below is the documented "solution":
 // https://github.com/angular/material2/issues/3810
@@ -53,7 +54,7 @@ import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   @Input() placeholder: string;
   @Input() debounceTime = 50;
-  @Input() displayValueFn: (x: any) => Observable<OptionEntry | undefined> = of;
+  @Input() displayValueFn: DisplayValueFn = of;
   searchControl = new FormControl();
   options: Observable<SearchResult>;
   incomingValues = new Subject<any>();
