@@ -64,7 +64,6 @@ export class Demo2LongSlowComponent {
           match: company.name === term
         }));
       return of(result).pipe(
-        tap(x => console.log('search result', term, x)),
         delayWhen(_event => timer(Math.random() * 1000 + 400)));
     };
   }

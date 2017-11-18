@@ -7,11 +7,10 @@ export interface OptionEntry {
   tip?: string;
 }
 
-export interface ErrorEntry {
-  msg: string;
+export interface SearchResult {
+  list?: OptionEntry[];
+  errorMessage?: string;
 }
 
-export type SearchResult = OptionEntry[] | ErrorEntry;
-
-export type DisplayValueFn = (x: any) => Observable<OptionEntry | null>;
-export type SearchFn = (x: string) => Observable<OptionEntry[]>;
+export type DisplayValueFn = (value: any) => Observable<OptionEntry | null>;
+export type SearchFn = (term: string) => Observable<OptionEntry[]>;

@@ -6,12 +6,12 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { of } from 'rxjs/observable/of';
 import { timer } from 'rxjs/observable/timer';
 import { combineLatest } from 'rxjs/observable/combineLatest';
-import { switchMap, startWith, catchError, map, filter, debounce, take, tap, refCount } from 'rxjs/operators';
+import { switchMap, startWith, catchError, map, filter, debounce, take, tap, refCount, scan } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 import { publishReplay } from 'rxjs/operators/publishReplay';
 import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 
-import { OptionEntry, SearchResult, SearchFn, DisplayValueFn } from './types';
+import { OptionEntry, SearchFn, DisplayValueFn, SearchResult } from './types';
 
 // The CSS approach below is the documented "solution":
 // https://github.com/angular/material2/issues/3810
@@ -74,38 +74,54 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   }
 
   constructor() {
-    const termValues = this.searchControl.valueChanges.pipe(
-      startWith(this.searchControl.value),
-      debounce(_x => timer(this.debounceTime)),
-      // Typing into input sends simple strings,
-      // selecting from Material Option list provides objects
-      map(v => v && (typeof v === 'object') ? (v as OptionEntry).display : v)
-    );
+    // Typing into input sends simple strings,
+    // Initial value is sometimes null, and
+    // selecting from Material Option list provides objects
+    const searches: Observable<OptionEntry | string | null> =
+      this.searchControl.valueChanges.pipe(
+        startWith(this.searchControl.value),
+        debounce(_x => timer(this.debounceTime))
+      );
 
-    const searchResult = combineLatest(
-      termValues,
+    this.options = combineLatest(
+      searches,
       this.incomingSearchFn,
     ).pipe(
-      switchMap(([term, fn]) => fn(term).pipe(
-        catchError(_err => of({ msg: 'Error ' + _err })),
-        startWith(null)
-      )),
+      switchMap(([search, fn]) => {
+        if (search === null) {
+          search = '';
+        }
+        if (typeof search === 'string') {
+          return fn(search).pipe(
+            map(list => ({ list })),
+            catchError(errorMessage => of({ errorMessage })),
+            startWith({})
+          );
+        }
+
+        // No need to call function to search for it.
+        const entry = search as OptionEntry;
+        return of<SearchResult>({
+          list: [{ ...entry, match: true }]
+        });
+      }),
       publishReplay(1),
       refCount()
       );
 
-    this.options = searchResult;
-    this.selectedValue = searchResult.pipe(
-      filter(results => Array.isArray(results)),
-      map((results: OptionEntry[]) => {
-        const entry = results.find(option => option.match);
+    this.selectedValue = this.options.pipe(
+      filter(result => !!result.list),
+      map(result => {
+        const list = result.list || []; // appease TS
+        const entry = list.find(option => option.match);
         return entry && entry.value || null;
       }),
       distinctUntilChanged()
     );
 
+    // a value is provided from outside; request the full entry
     this.incomingValuesSub = this.incomingValues
-      .pipe(switchMap(value => this.displayValueFn(value)))
+      .pipe(switchMap<any, OptionEntry>(value => this.displayValueFn(value)))
       .subscribe(value => this.searchControl.setValue(value));
   }
 
@@ -167,3 +183,9 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   onChange = (_: any) => { };
   onTouched = () => { };
 }
+
+// function kyle<T>(fn: (t: T) => T) {
+//   return function (o: Observable<T>): Observable<T> {
+//     return o;
+//   };
+// }
