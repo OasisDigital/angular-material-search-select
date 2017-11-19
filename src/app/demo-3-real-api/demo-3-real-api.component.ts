@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
 import { NorthwindODataConfigurationFactory } from '../NorthwindODataConfigurationFactory';
-import { ODataConfiguration, ODataServiceFactory, ODataService, ODataQuery, ODataPagedResult } from 'angular-odata-es5';
+import { ODataConfiguration, ODataServiceFactory, ODataService, ODataQuery, ODataPagedResult } from '../angular-odata-fork';
 
 import { OptionEntry } from '../obs-autocomplete/';
 

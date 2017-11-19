@@ -1,4 +1,4 @@
-import { ODataConfiguration } from 'angular-odata-es5';
+import { ODataConfiguration } from './angular-odata-fork';
 
 export class NorthwindODataConfigurationFactory {
 

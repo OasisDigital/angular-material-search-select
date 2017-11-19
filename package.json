@@ -55,7 +55,6 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/lodash": "^4.14.85",
     "@types/node": "^6.0.92",
-    "angular-odata-es5": "^0.2.5",
     "codelyzer": "^4.0.1",
     "core-js": "^2.5.1",
     "faker": "^4.1.0",

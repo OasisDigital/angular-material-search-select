@@ -14,7 +14,7 @@ import { Demo2LongSlowComponent } from './demo-2-long-slow/demo-2-long-slow.comp
 import { Demo3RealApiComponent } from './demo-3-real-api/demo-3-real-api.component';
 import { Demo4CascadeComponent } from './demo-4-cascade/demo-4-cascade.component';
 import { Demo5MultiColumnComponent } from './demo-5-multi-column/demo-5-multi-column.component';
-import { AngularODataModule } from 'angular-odata-es5';
+import { AngularODataModule } from './angular-odata-fork';
 
 const routes: Routes = [
   { path: '', redirectTo: 'simple', pathMatch: 'full' },
