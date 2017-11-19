@@ -8,9 +8,11 @@ the project locally, this screen works.</b></p>
   <div>Value: {{{ value: ours.value } | json }}
     Touched: {{ ours.touched | json }}
     Errors: {{ ours.errors | json }}</div>
+
   <div>
     <input #manual type="text" placeholder="Change Our Value" (change)="ours.setValue(manual.value)">
   </div>
+
   <div style="padding: 12px; border: 1px solid">
     <obs-autocomplete
     placeholder="Company"

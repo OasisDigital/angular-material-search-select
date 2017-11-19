@@ -60,6 +60,7 @@ export class Demo3RealApiComponent {
         return ({
           value: emps[0].EmployeeID,
           display: emps[0].FirstName + ' ' + emps[0].LastName,
+          details: {},
           match: true
         });
       }));
@@ -87,6 +88,7 @@ export class Demo3RealApiComponent {
         pagedResult.data.map(emp => ({
           value: emp.EmployeeID,
           display: emp.FirstName + ' ' + emp.LastName,
+          details: {},
           match: (emp.FirstName + ' ' + emp.LastName) === term
         }))));
   }

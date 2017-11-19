@@ -31,9 +31,10 @@ export class Demo1SimpleFastComponent {
     }
     const display = value ? value + '!' : '';
     return of({
+      value,
       display,
+      details: {},
       match: true,
-      value
     });
   }
 

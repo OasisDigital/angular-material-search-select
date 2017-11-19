@@ -2,7 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { MatAutocompleteModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import {
+  MatAutocompleteModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ObsAutocompleteModule } from './obs-autocomplete/';
@@ -15,6 +20,7 @@ import { Demo3RealApiComponent } from './demo-3-real-api/demo-3-real-api.compone
 import { Demo4CascadeComponent } from './demo-4-cascade/demo-4-cascade.component';
 import { Demo5MultiColumnComponent } from './demo-5-multi-column/demo-5-multi-column.component';
 import { AngularODataModule } from './angular-odata-fork';
+import { SelectCompanyComponent } from './select-company/select-company.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'simple', pathMatch: 'full' },
@@ -34,7 +40,8 @@ const routes: Routes = [
     Demo2LongSlowComponent,
     Demo3RealApiComponent,
     Demo4CascadeComponent,
-    Demo5MultiColumnComponent
+    Demo5MultiColumnComponent,
+    SelectCompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +49,7 @@ const routes: Routes = [
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
     ObsAutocompleteModule,

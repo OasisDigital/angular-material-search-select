@@ -2,9 +2,9 @@ import { Observable } from 'rxjs/Observable';
 
 export interface OptionEntry {
   display: string;
-  value: any;
   match: boolean;
-  tip?: string;
+  value: any;
+  details: any;
 }
 
 export interface SearchResult {

@@ -1,22 +1,27 @@
 export const shortOptions = [
   {
+    value: 1,
     display: 'One',
-    value: 1
+    details: {}
   },
   {
+    value: 2,
     display: 'Two',
-    value: 2
+    details: {}
   },
   {
+    value: 3,
     display: 'Three',
-    value: 3
+    details: {}
   },
   {
+    value: 4,
     display: 'Four',
-    value: 4
+    details: {}
   },
   {
+    value: 14,
     display: 'Fourteen',
-    value: 14
+    details: {}
   }
 ];
