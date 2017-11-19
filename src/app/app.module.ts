@@ -13,6 +13,8 @@ import { Demo1SimpleFastComponent } from './demo-1-simple-fast/demo-1-simple-fas
 import { Demo2LongSlowComponent } from './demo-2-long-slow/demo-2-long-slow.component';
 import { Demo3RealApiComponent } from './demo-3-real-api/demo-3-real-api.component';
 import { Demo4CascadeComponent } from './demo-4-cascade/demo-4-cascade.component';
+import { Demo5MultiColumnComponent } from './demo-5-multi-column/demo-5-multi-column.component';
+import { AngularODataModule } from 'angular-odata-es5';
 
 const routes: Routes = [
   { path: '', redirectTo: 'simple', pathMatch: 'full' },
@@ -20,7 +22,8 @@ const routes: Routes = [
   { path: 'simple', component: Demo1SimpleFastComponent },
   { path: 'long', component: Demo2LongSlowComponent },
   { path: 'real', component: Demo3RealApiComponent },
-  { path: 'cascade', component: Demo4CascadeComponent }
+  { path: 'cascade', component: Demo4CascadeComponent },
+  { path: 'multi', component: Demo5MultiColumnComponent }
 ];
 
 @NgModule({
@@ -30,7 +33,8 @@ const routes: Routes = [
     Demo1SimpleFastComponent,
     Demo2LongSlowComponent,
     Demo3RealApiComponent,
-    Demo4CascadeComponent
+    Demo4CascadeComponent,
+    Demo5MultiColumnComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +46,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     ObsAutocompleteModule,
     HttpClientModule,
+    AngularODataModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
   providers: [],

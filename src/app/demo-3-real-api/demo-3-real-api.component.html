@@ -1,3 +1,18 @@
-<p>
-  demo-3-real-api works!
-</p>
+<h2>Observable autocomplete, Real (OData) API</h2>
+
+<form class="example-form">
+  <div>Value: {{{ value: ours.value } | json }}
+    Touched: {{ ours.touched | json }}
+    Errors: {{ ours.errors | json }}</div>
+  <div>
+    <input #manual type="text" placeholder="Change Our Value" (change)="ours.setValue(manual.value)">
+  </div>
+  <div style="padding: 12px; border: 1px solid">
+    <obs-autocomplete
+    placeholder="Company"
+    width="95%"
+    [formControl]="ours"
+    [displayValueFn]="valueToDisplay1"
+    [searchFn]="searchFn1"></obs-autocomplete>
+  </div>
+</form>
