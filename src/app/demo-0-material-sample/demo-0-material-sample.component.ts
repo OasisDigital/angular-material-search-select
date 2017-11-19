@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 import { shortOptions } from '../short-options';
 
@@ -13,6 +13,7 @@ export class Demo0MaterialSampleComponent {
   builtIn: FormControl = new FormControl();
   options = shortOptions;
   displayWith1 = this.displayWith.bind(this);
+  reqExample = new FormControl(null, [Validators.required]);
 
   displayWith(value: any) {
     const result = this.options.find(x => x.value === value);

@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 
-import { OptionEntry } from './obs-autocomplete/';
-import { hostViewClassName } from '@angular/compiler';
-
 @Component({
   selector: 'obs-root',
   templateUrl: './app.component.html',

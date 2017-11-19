@@ -16,4 +16,10 @@
   </mat-form-field>
   {{builtIn.value}}
   <hr>
+
+  <p>Example required field:</p>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Required field here" [formControl]="reqExample">
+  </mat-form-field>
+
 </form>

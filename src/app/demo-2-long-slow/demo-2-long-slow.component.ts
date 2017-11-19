@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
-import { delayWhen, tap } from 'rxjs/operators';
+import { delayWhen } from 'rxjs/operators';
 import { timer } from 'rxjs/observable/timer';
 
 import { OptionEntry } from '../obs-autocomplete/';
@@ -22,7 +22,6 @@ const companies = window.testData.companies;
 })
 export class Demo2LongSlowComponent {
   ours = new FormControl(null, [Validators.required]);
-  reqExample = new FormControl(null, [Validators.required]);
   companyLimit = 10000;
   searchFn: any;
 
@@ -36,6 +35,7 @@ export class Demo2LongSlowComponent {
   }
 
   valueToDisplay(value: any): Observable<OptionEntry | null> {
+    // TODO number vs string issue below
     const company = companies.find((c: any) => c.id === value);
     if (company) {
       return of({

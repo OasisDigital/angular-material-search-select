@@ -1,5 +1,8 @@
 <mat-form-field class="obs-mat-container" [style.width]="width">
-  <mat-spinner class="obs-mat-spinner" *ngIf="(options | async) == undefined" [diameter]="20" [strokeWidth]="5"></mat-spinner>
+  <mat-spinner class="obs-mat-spinner"
+    *ngIf="loading | async"
+    [diameter]="20"
+    [strokeWidth]="5"></mat-spinner>
   <input
       type="text"
       [placeholder]="placeholder"
@@ -12,11 +15,11 @@
       (focus)="input.select(); focus()"
       [matAutocomplete]="auto">
   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith" class="bigger-mat-ac">
-    <mat-option *ngFor="let option of (options | async)?.list"
+    <mat-option *ngFor="let option of list | async"
       [value]="option"
       [matTooltip]="option.tip">
       {{ option.display }}
     </mat-option>
   </mat-autocomplete>
-  <b>{{ (options | async)?.errorMessage }}</b>
+  <b>{{ errorMessage | async }}</b>
 </mat-form-field>
