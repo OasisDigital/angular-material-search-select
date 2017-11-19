@@ -58,6 +58,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   @Input() debounceTime = 100;
   @Input() width = '';
   @Input() displayValueFn: DisplayValueFn = of;
+
   searchControl = new FormControl();
   options: Observable<SearchResult>;
   incomingValues = new Subject<any>();
@@ -68,9 +69,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
   private selectedValue: Observable<any>;
 
   @Input() set searchFn(f: SearchFn) {
-    if (f) {
-      this.incomingSearchFn.next(f);
-    }
+    this.incomingSearchFn.next(f);
   }
 
   constructor() {
@@ -85,7 +84,7 @@ export class AutocompleteComponent implements ControlValueAccessor, OnDestroy {
 
     this.options = combineLatest(
       searches,
-      this.incomingSearchFn,
+      this.incomingSearchFn.pipe(filter(fn => !!fn)),
     ).pipe(
       switchMap(([search, fn]) => {
         if (search === null) {

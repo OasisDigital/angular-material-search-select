@@ -12,6 +12,7 @@ export class Demo0MaterialSampleComponent {
 
   builtIn: FormControl = new FormControl();
   options = shortOptions;
+  displayWith1 = this.displayWith.bind(this);
 
   displayWith(value: any) {
     const result = this.options.find(x => x.value === value);

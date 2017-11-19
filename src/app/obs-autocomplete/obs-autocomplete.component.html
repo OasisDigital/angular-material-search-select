@@ -3,7 +3,7 @@
   <input
       type="text"
       [placeholder]="placeholder"
-      aria-label="Number"
+      [attr.aria-label]="placeholder"
       spellcheck="false"
       matInput
       [formControl]="searchControl"
@@ -12,14 +12,11 @@
       (focus)="input.select(); focus()"
       [matAutocomplete]="auto">
   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith" class="bigger-mat-ac">
-    <ng-container *ngIf="options | async as result">
-      <mat-option *ngFor="let option of result.list"
-        [value]="option"
-        [matTooltip]="option.tip">
-        {{ option.display }}
-      </mat-option>
-    </ng-container>
+    <mat-option *ngFor="let option of (options | async)?.list"
+      [value]="option"
+      [matTooltip]="option.tip">
+      {{ option.display }}
+    </mat-option>
   </mat-autocomplete>
   <b>{{ (options | async)?.errorMessage }}</b>
-
 </mat-form-field>
