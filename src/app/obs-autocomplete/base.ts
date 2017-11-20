@@ -18,7 +18,7 @@ import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 import { OptionEntry, SearchFn, DisplayValueFn, SearchResult } from './types';
 
 export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
-  @Input() debounceTime = 100;
+  @Input() debounceTime = 75;
   @Input() displayValueFn: DisplayValueFn = of;
   @Input() set searchFn(f: SearchFn) { this.incomingSearchFn.next(f); }
 
@@ -57,12 +57,10 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
   private selectedValue: Observable<any>;
 
   constructor() {
-    // Typing into input sends simple strings,
-    // Initial value is sometimes null, and
-    // selecting from Material Option list provides objects
     const searches: Observable<OptionEntry | string | null> =
       this.searchControl.valueChanges.pipe(
         startWith(this.searchControl.value),
+        distinctUntilChanged(),
         debounce(_x => timer(this.debounceTime))
       );
 
@@ -71,10 +69,12 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
       this.incomingSearchFn.pipe(filter(fn => !!fn)),
     ).pipe(
       switchMap(([search, fn]) => {
+        // Initial value is sometimes null
         if (search === null) {
           search = '';
         }
         if (typeof search === 'string') {
+          // Typing into input sends simple strings,
           return fn(search).pipe(
             map(list => ({ list })),
             catchError(errorMessage => of({ errorMessage })),
@@ -82,7 +82,8 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
           );
         }
 
-        // No need to call function to search for it.
+        // selecting from Material Option list provides objects, so there is
+        // no need to call function to search for it.
         const entry = search as OptionEntry;
         return of<SearchResult>({
           list: [{ ...entry, match: true }]

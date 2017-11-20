@@ -7,7 +7,8 @@
       Errors: {{ ours.errors | json }}</div>
 
   <div>
-    <input #manual type="text" placeholder="Change Our Value" (change)="ours.setValue(manual.value)">
+    <input #manual type="text" placeholder="Change Our Value">
+    <button (click)="ours.setValue(manual.value)">Set</button>
   </div>
 
   <div>
