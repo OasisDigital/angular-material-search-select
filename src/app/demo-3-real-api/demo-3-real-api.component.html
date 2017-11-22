@@ -1,8 +1,11 @@
 <h2>Observable autocomplete, Real (OData) API</h2>
 
-<p><b>Currently the screen does not work on the demo deployment posted online,
-because the example OData end point I am using does not support CORS. If you run
-the project locally, this screen works.</b></p>
+<p><b>This demo screen uses an
+<a href="https://github.com/StefH/angular-odata-es5">
+Angular Odata connector</a></b>
+(at the moment, forked in
+the project) to talk to a Microsoft supplied Northwind example database
+online. The data is accessed via a REST API following the OData spec, popular in .NET projects.</p>
 
 <form class="example-form">
   <div>Value: {{{ value: ours.value } | json }}
