@@ -35,6 +35,26 @@ One function provides a way to search for values and provide the display data.
 The other function provides a way to execute user searches and provide a list of
 candidates.
 
+## To publish new versions
+
+Work on it:
+
+```
+yarn start
+```
+
+Prepare a build:
+
+```
+yarn run build
+```
+
+Publish:
+
+```
+npm publish dist
+```
+
 ## Also an example of how to publish a component
 
 In addition to being a useful component, we have been using this repository
@@ -48,5 +68,3 @@ components.
 * add 1..n modules inside, for the components to be packaged
 * Make the overall application provide a demo, test environment, and so on for
   the components
-
-

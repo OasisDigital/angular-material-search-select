@@ -6,6 +6,7 @@ const data = require(fName);
 
 delete data.scripts;
 delete data.devDependencies;
+delete data.engines;
 data.private = false; // so the source package can keep private: true
 
 fs.writeFileSync(fName, stringify(data, { space: 2 }));

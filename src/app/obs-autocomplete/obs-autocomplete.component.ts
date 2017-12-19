@@ -32,6 +32,11 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     position: absolute;
     right: 5px;
   }
+  .obs-no-matches {
+    position: absolute;
+    text-color: silver;
+    right: 5px;
+  }
   .ng-invalid.ng-touched > .obs-mat-container {
     color: #f44336 !important;
   }
@@ -46,4 +51,5 @@ export class AutocompleteComponent extends ObsAutocompleteBase {
   @Input() placeholder: string;
   @Input() debounceTime = 100;
   @Input() width = '';
+  @Input() emptyText = '';
 }

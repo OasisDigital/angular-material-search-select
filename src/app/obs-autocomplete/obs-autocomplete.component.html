@@ -3,6 +3,7 @@
     *ngIf="loading | async"
     [diameter]="20"
     [strokeWidth]="5"></mat-spinner>
+  <i class="obs-no-matches" *ngIf="emptyText && empty | async">{{emptyText}}</i>
   <input
       type="text"
       [placeholder]="placeholder"

@@ -27,6 +27,7 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
   searchControl = new FormControl();
   loading: Observable<boolean>;
   list: Observable<OptionEntry[] | undefined>;
+  empty: Observable<boolean>;
   errorMessage: Observable<string | undefined>;
 
   focus() {
@@ -105,6 +106,7 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
 
     this.loading = options.pipe(map(o => !o.list && !o.errorMessage));
     this.list = options.pipe(map(o => o.list));
+    this.empty = options.pipe(map(o => o.list ? o.list.length === 0 : false));
     this.errorMessage = options.pipe(map(o => o.errorMessage));
 
     // a value is provided from outside; request the full entry
