@@ -3,47 +3,31 @@ import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
-import { NorthwindODataConfigurationFactory } from '../NorthwindODataConfigurationFactory';
-import { ODataConfiguration, ODataServiceFactory, ODataService, ODataQuery, ODataPagedResult } from '../angular-odata-fork';
 
 import { OptionEntry } from '../obs-autocomplete/';
-
-// use (a fork od) Angular Odata connector...
-// https://github.com/StefH/angular-odata-es5
-// to talk to the Northwind example OData db...
-// https://northwinddatabase.codeplex.com/
+import { HttpClient } from '@angular/common/http';
 
 export interface Employee {
-  EmployeeID: number;
-  FirstName: string;
-  LastName: string;
-  City: string;
-  BirthDate: Date;
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  hours_worked: number;
+  hourly_wage: number;
 }
 
-export interface Customer { // Future use
-  CustomerID: number;
-  CompanyName: string;
-  City: string;
-}
+const apiURL = 'https://api.angularbootcamp.com/employees';
 
 @Component({
   selector: 'obs-demo-3-real-api',
-  templateUrl: './demo-3-real-api.component.html',
-  providers: [{
-    provide: ODataConfiguration,
-    useFactory: NorthwindODataConfigurationFactory
-  }, ODataServiceFactory],
-  styles: []
+  templateUrl: './demo-3-real-api.component.html'
 })
 export class Demo3RealApiComponent {
   ours = new FormControl(null, [Validators.required]);
   valueToDisplay1 = this.valueToDisplay.bind(this);
   searchFn1 = this.searchFn.bind(this);
-  private odata: ODataService<Employee>;
 
-  constructor(odataFactory: ODataServiceFactory) {
-    this.odata = odataFactory.CreateService<Employee>('Employees');
+  constructor(private http: HttpClient) {
   }
 
   valueToDisplay(value: any): Observable<OptionEntry | null> {
@@ -54,50 +38,29 @@ export class Demo3RealApiComponent {
       return of(null);
     }
 
-    const query: ODataQuery<Employee> = this.odata
-      .Query()
-      .Select(['EmployeeID', 'FirstName', 'LastName', 'BirthDate', 'City'])
-      .Filter(`EmployeeID eq ${value}`);
-
-    return query
-      .Exec()
-      .pipe(map((emps: Employee[]) => {
-        if (emps.length === 0) {
-          return null;
-        }
-        return ({
-          value: emps[0].EmployeeID,
-          display: emps[0].FirstName + ' ' + emps[0].LastName,
-          details: {},
-          match: true
-        });
-      }));
+    return this.http.get<Employee>(apiURL + '/' + value).pipe(
+      map(e => ({
+        value: e.id,
+        display: `${e.first_name} ${e.last_name} (${e.email})`,
+        details: {},
+        match: true
+      }))
+    );
   }
 
   searchFn(term: string): Observable<OptionEntry[]> {
-    term = term || '';
-
-    let query: ODataQuery<Employee> = this.odata
-      .Query()
-      .Select(['EmployeeID', 'FirstName', 'LastName', 'BirthDate', 'City'])
-      .Top(200)
-      .OrderBy('LastName asc');
-
-    if (term !== '') {
-      const criteria = [];
-      criteria.push(`contains(LastName, '${term}')`);
-      criteria.push(`contains(FirstName, '${term}')`);
-      query = query.Filter(criteria.join(' or '));
-    }
-
-    return query
-      .ExecWithCount()
-      .pipe(map((pagedResult: ODataPagedResult<Employee>) =>
-        pagedResult.data.map(emp => ({
-          value: emp.EmployeeID,
-          display: emp.FirstName + ' ' + emp.LastName,
-          details: {},
-          match: (emp.FirstName + ' ' + emp.LastName) === term
-        }))));
+    return this.http.get<Employee[]>(apiURL, {
+      params: {
+        q: term || '',
+        _sort: 'last_name,first_name'
+      }
+    }).pipe(
+      map(list => list.map(e => ({
+        value: e.id,
+        display: `${e.first_name} ${e.last_name} (${e.email})`,
+        details: {},
+        match: (e.first_name + ' ' + e.last_name) === term
+      })))
+      );
   }
 }

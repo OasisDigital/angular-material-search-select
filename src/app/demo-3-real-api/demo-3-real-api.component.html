@@ -1,13 +1,10 @@
 <h2>Observable autocomplete, Real (OData) API</h2>
 
-<p><b>This demo screen uses an
-<a href="https://github.com/StefH/angular-odata-es5">
-Angular Odata connector</a></b>
-(at the moment, forked in
-the project) to talk to a Microsoft supplied Northwind example database
-online. The data is accessed via a REST API following the OData spec, popular in .NET projects.</p>
+<p>This demo screen calls a JSON-server API we have hosted on the Internet with
+proper CORS support. It illustrates how to use the observable auto complete with
+a server-side API.</p>
 
-<form class="example-form">
+<form>
   <div>Value: {{{ value: ours.value } | json }}
     Touched: {{ ours.touched | json }}
     Errors: {{ ours.errors | json }}</div>
@@ -17,12 +14,12 @@ online. The data is accessed via a REST API following the OData spec, popular in
     <button (click)="ours.setValue(manual.value)">Set</button>
   </div>
 
-  <div style="padding: 12px; border: 1px solid">
+  <div class="set-apart">
     <obs-autocomplete
-    placeholder="Company"
-    width="95%"
-    [formControl]="ours"
-    [displayValueFn]="valueToDisplay1"
-    [searchFn]="searchFn1"></obs-autocomplete>
+      placeholder="Company"
+      width="95%"
+      [formControl]="ours"
+      [displayValueFn]="valueToDisplay1"
+      [searchFn]="searchFn1"></obs-autocomplete>
   </div>
 </form>

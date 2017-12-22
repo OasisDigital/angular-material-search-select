@@ -34,7 +34,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   }
   .obs-no-matches {
     position: absolute;
-    text-color: silver;
+    color: silver;
     right: 5px;
   }
   .ng-invalid.ng-touched > .obs-mat-container {

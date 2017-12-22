@@ -6,7 +6,10 @@ import {
   MatAutocompleteModule,
   MatFormFieldModule,
   MatInputModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatToolbarModule,
+  MatMenuModule,
+  MatButtonModule
 } from '@angular/material';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -19,11 +22,11 @@ import { Demo2LongSlowComponent } from './demo-2-long-slow/demo-2-long-slow.comp
 import { Demo3RealApiComponent } from './demo-3-real-api/demo-3-real-api.component';
 import { Demo4CascadeComponent } from './demo-4-cascade/demo-4-cascade.component';
 import { Demo5MultiColumnComponent } from './demo-5-multi-column/demo-5-multi-column.component';
-import { AngularODataModule } from './angular-odata-fork';
 import { SelectCompanyComponent } from './select-company/select-company.component';
+import { ExplanationComponent } from './explanation/explanation.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'simple', pathMatch: 'full' },
+  { path: '', component: ExplanationComponent, pathMatch: 'full' },
   { path: 'sample', component: Demo0MaterialSampleComponent },
   { path: 'simple', component: Demo1SimpleFastComponent },
   { path: 'long', component: Demo2LongSlowComponent },
@@ -41,7 +44,8 @@ const routes: Routes = [
     Demo3RealApiComponent,
     Demo4CascadeComponent,
     Demo5MultiColumnComponent,
-    SelectCompanyComponent
+    SelectCompanyComponent,
+    ExplanationComponent
   ],
   imports: [
     BrowserModule,
@@ -50,11 +54,13 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
     ObsAutocompleteModule,
     HttpClientModule,
-    AngularODataModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
   providers: [],

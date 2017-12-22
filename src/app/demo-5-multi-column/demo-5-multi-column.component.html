@@ -1,9 +1,11 @@
 <h2>Multi Column</h2>
-<p>To go beyond the simple auto complete and provide a customized drop-down, use
-the base class and write your own auto complete control with the correct column
-set up and formatting. An example is shown here.</p>
 
-<form class="example-form">
+<p>To go beyond a one-column autocomplete and provide a customized drop-down,
+use the base class and write your own control with the correct column set up and
+formatting. An example is shown here.  This example uses unusual "table" CSS to
+create an acceptable appearance multiple columns.</p>
+
+<form>
   <div>Value: {{ { value: ours.value } | json }}
       Touched: {{ ours.touched | json }}
       Errors: {{ ours.errors | json }}</div>
@@ -12,10 +14,10 @@ set up and formatting. An example is shown here.</p>
     <input #manual type="text" placeholder="Change Our Value" (change)="ours.setValue(manual.value)">
   </div>
 
-  <div style="padding: 12px; border: 1px solid">
+  <div class="set-apart">
     <obs-select-company
-    [formControl]="ours"
-    [displayValueFn]="valueToDisplay"
-    [searchFn]="searchFn"></obs-select-company>
+      [formControl]="ours"
+      [displayValueFn]="valueToDisplay"
+      [searchFn]="searchFn"></obs-select-company>
   </div>
 </form>

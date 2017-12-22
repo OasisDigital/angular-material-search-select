@@ -17,8 +17,9 @@ import { shortOptions } from '../short-options';
 export class Demo1SimpleFastComponent {
   ours = new FormControl();
   disableMe = new FormControl();
-  searchFn = this.search.bind(this);
   options = shortOptions;
+
+  searchFn = this.search.bind(this);
 
   constructor() {
     this.disableMe.valueChanges.subscribe(dis =>

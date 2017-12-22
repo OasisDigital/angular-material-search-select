@@ -1,6 +1,9 @@
 <h2>Angular Material default autocomplete, for comparison</h2>
 
-<form class="example-form">
+<form>
+  <h3>Non-required field</h3>
+  <p>Value: {{builtIn.value}} </p>
+
   <mat-form-field class="example-full-width">
     <input type="text"
       placeholder="Pick one"
@@ -14,10 +17,9 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  {{builtIn.value}}
-  <hr>
 
-  <p>Example required field:</p>
+  <h3>Required field</h3>
+  <p>(There is no auto complete here, it is just a visual example for comparison with other screens.)</p>
   <mat-form-field>
     <input type="text" matInput placeholder="Required field here" [formControl]="reqExample">
   </mat-form-field>

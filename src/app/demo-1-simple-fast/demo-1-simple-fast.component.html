@@ -1,7 +1,7 @@
 <h2>Observable autocomplete, simple fast list</h2>
 <p>(Also illustrates required field.)</p>
 
-<form class="example-form">
+<form>
   <div>Value: {{ { value: ours.value } | json }}
       Touched: {{ ours.touched | json }}
       Errors: {{ ours.errors | json }}</div>
@@ -17,12 +17,12 @@
     </label>
   </div>
 
-  <div style="padding: 12px; border: 1px solid">
+  <div class="set-apart">
     <obs-autocomplete
-    placeholder="Person"
-    emptyText="(No matches)"
-    [formControl]="ours"
-    [displayValueFn]="valueToDisplay"
-    [searchFn]="searchFn"></obs-autocomplete>
+      placeholder="Person"
+      emptyText="(No matches)"
+      [formControl]="ours"
+      [displayValueFn]="valueToDisplay"
+      [searchFn]="searchFn"></obs-autocomplete>
   </div>
 </form>

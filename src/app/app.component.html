@@ -1,32 +1,22 @@
-<div class="nav">
+<mat-toolbar color="primary">
+  <a mat-button routerLinkActive="active-link" routerLink="/" [routerLinkActiveOptions]="{exact: true}">Explanation</a>
+  <a mat-button routerLinkActive="active-link" routerLink="/sample">Default Autocomplete</a>
+  <a mat-button routerLinkActive="active-link" routerLink="/simple">Simple</a>
+  <a mat-button routerLinkActive="active-link" routerLink="/long">Long Slow</a>
+  <a mat-button routerLinkActive="active-link" routerLink="/real">Real API</a>
+  <a mat-button routerLinkActive="active-link" routerLink="/cascade">Cascading</a>
+  <a mat-button routerLinkActive="active-link" routerLink="/multi">Multi column</a>
+</mat-toolbar>
 
-  <ul>
-    <li routerLinkActive="green-background">
-      <a [routerLink]="['/sample']">Plain AM example</a>
-    </li>
-    -
-    <li routerLinkActive="green-background">
-      <a [routerLink]="['/simple']">Simple</a>
-    </li>
-    -
-    <li routerLinkActive="green-background">
-      <a [routerLink]="['/long']">Long Slow</a>
-    </li>
-    -
-    <li routerLinkActive="green-background">
-      <a [routerLink]="['/real']">Real API</a>
-    </li>
-    -
-    <li routerLinkActive="green-background">
-      <a [routerLink]="['/cascade']">Cascading</a>
-    </li>
-    -
-    <li routerLinkActive="green-background">
-      <a [routerLink]="['/multi']">Multi column</a>
-    </li>
-  </ul>
+<div class="container mat-typography">
+  <router-outlet></router-outlet>
 </div>
 
-<hr>
-
-<router-outlet></router-outlet>
+<style>
+  .active-link {
+    color: #ff4081 !important;
+  }
+  .container {
+    margin: 50px 100px;
+  }
+</style>
