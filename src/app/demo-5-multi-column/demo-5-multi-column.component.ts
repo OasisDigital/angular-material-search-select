@@ -28,8 +28,7 @@ export class Demo5MultiColumnComponent implements DataSource {
       return of({
         value: company.id,
         display: company.name,
-        details: {},
-        match: true
+        details: {}
       });
     }
     return of(null);
@@ -43,8 +42,7 @@ export class Demo5MultiColumnComponent implements DataSource {
       .map((company: any) => ({
         value: company.id,
         display: company.name,
-        details: company,
-        match: company.name === term
+        details: company
       }));
     return of(result);
   }

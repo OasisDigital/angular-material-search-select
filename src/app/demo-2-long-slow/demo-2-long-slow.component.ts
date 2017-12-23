@@ -44,8 +44,7 @@ export class Demo2LongSlowComponent {
           return of({
             value: company.id,
             display: company.name,
-            details: {},
-            match: true
+            details: {}
           });
         }
         return of(null);
@@ -61,8 +60,7 @@ export class Demo2LongSlowComponent {
           .slice(0, 200)
           .map((company: any) => ({
             value: company.id,
-            display: company.name,
-            match: company.name === term
+            display: company.name
           }));
         return of(result).pipe(
           delayWhen(_event => timer(Math.random() * 1000 + 400)));

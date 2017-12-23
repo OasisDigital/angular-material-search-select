@@ -18,6 +18,7 @@ import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 import { OptionEntry, DataSource } from './types';
 
 interface SearchResult {
+  search: string;
   list?: OptionEntry[];
   errorMessage?: string;
 }
@@ -77,25 +78,27 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
       searches,
       this.incomingDataSources.pipe(filter(ds => !!ds)),
     ).pipe(
-      switchMap(([search, ds]) => {
+      switchMap(([srch, ds]) => {
         // Initial value is sometimes null
-        if (search === null) {
-          search = '';
+        if (srch === null) {
+          srch = '';
         }
-        if (typeof search === 'string') {
+        if (typeof srch === 'string') {
+          const search: string = srch;
           // Typing into input sends simple strings,
-          return ds.search(search).pipe(
-            map(list => ({ list })),
-            catchError(errorMessage => of({ errorMessage })),
-            startWith({})
+          return ds.search(srch).pipe(
+            map(list => ({ search, list })),
+            catchError(errorMessage => of({ search, errorMessage })),
+            startWith({ search })
           );
         }
 
         // selecting from Material Option list provides objects, so there is
         // no need to call function to search for it.
-        const entry = search as OptionEntry;
+        const entry = srch as OptionEntry;
         return of<SearchResult>({
-          list: [{ ...entry, match: true }]
+          search: srch.display,
+          list: [{ ...entry }]
         });
       }),
       publishReplay(1),
@@ -106,7 +109,7 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
       filter(result => !!result.list),
       map(result => {
         const list = result.list || []; // appease TS
-        const entry = list.find(option => option.match);
+        const entry = list.find(option => option.display === result.search);
         return entry && entry.value || null;
       }),
       distinctUntilChanged()

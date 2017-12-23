@@ -70,3 +70,9 @@ components.
 * Add a module inside, for the components to be packaged.
 * Make the overall application provide a demo, test environment, etc. for
   the components.
+
+## Who?
+
+<a href="https://kylecordes.com/">Kyle Cordes</a>, at
+<a href="https://oasisdigital.com/">Oasis Digital</a> /
+<a href="https://angularbootcamp.com/">Angular Boot Camp</a>.

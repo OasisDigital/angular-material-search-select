@@ -41,8 +41,7 @@ export class Demo3RealApiComponent {
           map(e => ({
             value: e.id,
             display: `${e.first_name} ${e.last_name} (${e.email})`,
-            details: {},
-            match: true
+            details: {}
           }))
         );
       },
@@ -56,8 +55,7 @@ export class Demo3RealApiComponent {
           map(list => list.map(e => ({
             value: e.id,
             display: `${e.first_name} ${e.last_name} (${e.email})`,
-            details: {},
-            match: (e.first_name + ' ' + e.last_name) === term
+            details: {}
           }))));
       }
     };

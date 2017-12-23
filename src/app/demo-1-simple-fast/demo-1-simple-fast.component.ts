@@ -32,8 +32,7 @@ export class Demo1SimpleFastComponent implements DataSource {
     return of({
       value,
       display,
-      details: {},
-      match: true,
+      details: {}
     });
   }
 
@@ -44,7 +43,6 @@ export class Demo1SimpleFastComponent implements DataSource {
     const lowerTerm = typeof term === 'string' ? term.toLowerCase() : '';
     return of(this.options
       .filter(option => option.display.toLowerCase().indexOf(lowerTerm) >= 0)
-      .map(option => ({ ...option, match: option.display === term }))
     ).pipe(delayWhen(_event =>
       timer(Math.random() * 300 + 100)
     ));
