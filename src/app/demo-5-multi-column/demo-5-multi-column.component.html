@@ -6,17 +6,18 @@ formatting. An example is shown here.  This example uses unusual "table" CSS to
 create an acceptable appearance multiple columns.</p>
 
 <form>
-  <div>Value: {{ { value: ours.value } | json }}
-      Touched: {{ ours.touched | json }}
-      Errors: {{ ours.errors | json }}</div>
+  <div>Value: {{ { value: companyControl.value } | json }}
+      Touched: {{ companyControl.touched | json }}
+      Errors: {{ companyControl.errors | json }}</div>
 
   <div>
-    <input #manual type="text" placeholder="Change Our Value" (change)="ours.setValue(manual.value)">
+    <input #manual type="text" placeholder="Change Our Value">
+    <button (click)="companyControl.setValue(manual.value)">Set</button>
   </div>
 
   <div class="set-apart">
     <obs-select-company
-      [formControl]="ours"
+      [formControl]="companyControl"
       [dataSource]="this"></obs-select-company>
   </div>
 </form>

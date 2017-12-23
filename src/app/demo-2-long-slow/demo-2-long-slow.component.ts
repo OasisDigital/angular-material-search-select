@@ -35,8 +35,10 @@ export class Demo2LongSlowComponent {
   }
 
   updateDataSource() {
+    // Here is another way to provide a data source. Create it as a literal
+    // object wherever it is convenient to do so in the code.
     const companiesToSearch = companies.slice(0, this.companyLimit);
-    this.dataSource = {
+    const dataSource: DataSource = {
       displayValue(value: any): Observable<OptionEntry | null> {
         // TODO number vs string issue below
         const company = companies.find((c: any) => c.id === value);
@@ -66,5 +68,6 @@ export class Demo2LongSlowComponent {
           delayWhen(_event => timer(Math.random() * 1000 + 400)));
       }
     };
+    this.dataSource = dataSource;
   }
 }

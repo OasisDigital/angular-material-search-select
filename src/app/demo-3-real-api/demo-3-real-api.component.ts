@@ -27,6 +27,8 @@ export class Demo3RealApiComponent {
   dataSource: DataSource;
 
   constructor(http: HttpClient) {
+    // This data source connects to an API we have posted on the Internet for
+    // demonstrations and use in our Angular Boot Camp class.
 
     this.dataSource = {
       displayValue(value: any): Observable<OptionEntry | null> {

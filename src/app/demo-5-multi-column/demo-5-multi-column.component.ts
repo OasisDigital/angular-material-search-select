@@ -20,7 +20,7 @@ const companies: Company[] = window.testData.companies;
   styles: []
 })
 export class Demo5MultiColumnComponent implements DataSource {
-  ours = new FormControl(null, []);
+  companyControl = new FormControl(null, []);
 
   displayValue(value: any): Observable<OptionEntry | null> {
     const company = companies.find((c: any) => c.id === parseInt(value || '', 10));

@@ -24,6 +24,12 @@ export class Demo1SimpleFastComponent implements DataSource {
       dis ? this.ours.disable() : this.ours.enable());
   }
 
+  // The simplest way to provide a DataSource to the observable auto complete is
+  // to have the application component (this example component you are reading
+  // now) implement the DataSource interface, then (see the template) pass it as
+  // [dataSource]="this". Of course this technique only works if you are using
+  // a single autocomplete component.
+
   displayValue(value: any): Observable<OptionEntry | null> {
     if (value === '333') {
       return of(null);

@@ -35,8 +35,7 @@ needs.
 
 Regardless of which layout approach you choose, at run time you must provide a
 DataSource, which is similar conceptually to the DataSource concept used by a
-mat-table semicolon that interface finds (and application code must provide) two
-methods:
+mat-table; that interface defines (and application code must provide) methods:
 
 * Method which searches for a values, and provides corresponding display text.
 * Method which takes a search query fragment and provides a list of match
@@ -59,10 +58,9 @@ demonstrate its use.
 
 ## Also an example of how to publish a component
 
-In addition to being a useful component, we have been using this repository
-together up example bits for how to most effectively publish a Angular component
-to NPM. You can see these patterns in use here, and borrow them for other
-components.
+In addition to being a useful component, we have been using this repository as
+an example of how to publish a Angular component to NPM. You can see these
+patterns in use here, and borrow them for other components:
 
 * Use ng-packagr. Outsource much of the complexity in bundling to that brilliant
   package.
