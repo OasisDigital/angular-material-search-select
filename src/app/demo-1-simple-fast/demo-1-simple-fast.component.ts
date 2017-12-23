@@ -6,7 +6,7 @@ import { _throw } from 'rxjs/observable/throw';
 import { delayWhen } from 'rxjs/operators';
 import { timer } from 'rxjs/observable/timer';
 
-import { OptionEntry } from '../obs-autocomplete/';
+import { OptionEntry, DataSource } from '../obs-autocomplete/';
 import { shortOptions } from '../short-options';
 
 @Component({
@@ -14,19 +14,17 @@ import { shortOptions } from '../short-options';
   templateUrl: './demo-1-simple-fast.component.html',
   styles: []
 })
-export class Demo1SimpleFastComponent {
+export class Demo1SimpleFastComponent implements DataSource {
   ours = new FormControl();
   disableMe = new FormControl();
   options = shortOptions;
-
-  searchFn = this.search.bind(this);
 
   constructor() {
     this.disableMe.valueChanges.subscribe(dis =>
       dis ? this.ours.disable() : this.ours.enable());
   }
 
-  valueToDisplay(value: any): Observable<OptionEntry | null> {
+  displayValue(value: any): Observable<OptionEntry | null> {
     if (value === '333') {
       return of(null);
     }

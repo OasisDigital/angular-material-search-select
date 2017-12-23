@@ -6,7 +6,7 @@ import { _throw } from 'rxjs/observable/throw';
 import { delayWhen } from 'rxjs/operators';
 import { timer } from 'rxjs/observable/timer';
 
-import { OptionEntry } from '../obs-autocomplete/';
+import { OptionEntry, DataSource } from '../obs-autocomplete/';
 
 declare global {
   interface Window {
@@ -23,48 +23,50 @@ const companies = window.testData.companies;
 export class Demo2LongSlowComponent {
   ours = new FormControl(null, [Validators.required]);
   companyLimit = 10000;
-  searchFn: any;
+  dataSource: DataSource;
 
   constructor() {
-    this.searchFn = this.makeSearchFn(this.companyLimit);
+    this.updateDataSource();
   }
 
   swapSources() {
     this.companyLimit = this.companyLimit === 10000 ? 5 : 10000;
-    this.searchFn = this.makeSearchFn(this.companyLimit);
+    this.updateDataSource();
   }
 
-  valueToDisplay(value: any): Observable<OptionEntry | null> {
-    // TODO number vs string issue below
-    const company = companies.find((c: any) => c.id === value);
-    if (company) {
-      return of({
-        value: company.id,
-        display: company.name,
-        details: {},
-        match: true
-      });
-    }
-    return of(null);
-  }
+  updateDataSource() {
+    const companiesToSearch = companies.slice(0, this.companyLimit);
+    this.dataSource = {
+      displayValue(value: any): Observable<OptionEntry | null> {
+        // TODO number vs string issue below
+        const company = companies.find((c: any) => c.id === value);
+        if (company) {
+          return of({
+            value: company.id,
+            display: company.name,
+            details: {},
+            match: true
+          });
+        }
+        return of(null);
+      },
 
-  makeSearchFn(n: number) {
-    const companiesToSearch = companies.slice(0, n);
-    return (term: string): Observable<OptionEntry[]> => {
-      if (term === 'error') {
-        return _throw('testing');
+      search(term: string): Observable<OptionEntry[]> {
+        if (term === 'error') {
+          return _throw('testing');
+        }
+        const lowerTerm = typeof term === 'string' ? term.toLowerCase() : '';
+        const result = companiesToSearch
+          .filter((c: any) => c.name.toLowerCase().indexOf(lowerTerm) >= 0)
+          .slice(0, 200)
+          .map((company: any) => ({
+            value: company.id,
+            display: company.name,
+            match: company.name === term
+          }));
+        return of(result).pipe(
+          delayWhen(_event => timer(Math.random() * 1000 + 400)));
       }
-      const lowerTerm = typeof term === 'string' ? term.toLowerCase() : '';
-      const result = companiesToSearch
-        .filter((c: any) => c.name.toLowerCase().indexOf(lowerTerm) >= 0)
-        .slice(0, 200)
-        .map((company: any) => ({
-          value: company.id,
-          display: company.name,
-          match: company.name === term
-        }));
-      return of(result).pipe(
-        delayWhen(_event => timer(Math.random() * 1000 + 400)));
     };
   }
 }

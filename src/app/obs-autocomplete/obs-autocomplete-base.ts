@@ -10,17 +10,21 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { of } from 'rxjs/observable/of';
 import { timer } from 'rxjs/observable/timer';
 import { combineLatest } from 'rxjs/observable/combineLatest';
-import { switchMap, startWith, catchError, map, filter, debounce, take, refCount } from 'rxjs/operators';
+import { switchMap, startWith, catchError, map, filter, debounce, take, refCount, withLatestFrom } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 import { publishReplay } from 'rxjs/operators/publishReplay';
 import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 
-import { OptionEntry, SearchFn, DisplayValueFn, SearchResult } from './types';
+import { OptionEntry, DataSource } from './types';
+
+interface SearchResult {
+  list?: OptionEntry[];
+  errorMessage?: string;
+}
 
 export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
   @Input() debounceTime = 75;
-  @Input() displayValueFn: DisplayValueFn = of;
-  @Input() set searchFn(f: SearchFn) { this.incomingSearchFn.next(f); }
+  @Input() set dataSource(ds: DataSource) { this.incomingDataSources.next(ds); }
 
   // API provided to client component (for use in its template)
 
@@ -51,8 +55,12 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
   // Internals
   // tslint:disable:member-ordering
   private incomingValues = new Subject<any>();
-  private incomingSearchFn = new BehaviorSubject<SearchFn>(() => of([]));
-  private incomingValuesSub: Subscription;
+  private incomingDataSources = new BehaviorSubject<DataSource>({
+    displayValue: of,
+    search: () => of([])
+  });
+
+  private incomingDataSourcesSub: Subscription;
   private outsideValue: any;
   private selectedValueSub: Subscription;
   private selectedValue: Observable<any>;
@@ -67,16 +75,16 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
 
     const options: Observable<SearchResult> = combineLatest(
       searches,
-      this.incomingSearchFn.pipe(filter(fn => !!fn)),
+      this.incomingDataSources.pipe(filter(ds => !!ds)),
     ).pipe(
-      switchMap(([search, fn]) => {
+      switchMap(([search, ds]) => {
         // Initial value is sometimes null
         if (search === null) {
           search = '';
         }
         if (typeof search === 'string') {
           // Typing into input sends simple strings,
-          return fn(search).pipe(
+          return ds.search(search).pipe(
             map(list => ({ list })),
             catchError(errorMessage => of({ errorMessage })),
             startWith({})
@@ -110,8 +118,11 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
     this.errorMessage = options.pipe(map(o => o.errorMessage));
 
     // a value is provided from outside; request the full entry
-    this.incomingValuesSub = this.incomingValues
-      .pipe(switchMap<any, OptionEntry>(value => this.displayValueFn(value)))
+    this.incomingDataSourcesSub = this.incomingValues
+      .pipe(
+      withLatestFrom(this.incomingDataSources),
+      switchMap<[any, DataSource], OptionEntry>(([value, ds]) => ds.displayValue(value))
+      )
       .subscribe(value => this.searchControl.setValue(value));
   }
 
@@ -142,8 +153,8 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.incomingValuesSub) {
-      this.incomingValuesSub.unsubscribe();
+    if (this.incomingDataSourcesSub) {
+      this.incomingDataSourcesSub.unsubscribe();
     }
   }
 

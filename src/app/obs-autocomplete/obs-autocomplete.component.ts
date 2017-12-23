@@ -1,6 +1,7 @@
 import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, forwardRef } from '@angular/core';
-import { ObsAutocompleteBase } from './base';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { ObsAutocompleteBase } from './obs-autocomplete-base';
 
 // The CSS approach below is the documented "solution":
 // https://github.com/angular/material2/issues/3810
@@ -14,6 +15,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'obs-autocomplete',
   templateUrl: './obs-autocomplete.component.html',
+  styleUrls: ['./obs-autocomplete.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -21,29 +23,6 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
       multi: true
     }
   ],
-  styles: [`
-  .bigger-mat-ac.mat-autocomplete-panel {
-     max-height: 500px !important;
-  }
-  .obs-mat-container {
-    position: relative;
-  }
-  .obs-mat-container mat-spinner.obs-mat-spinner {
-    position: absolute;
-    right: 5px;
-  }
-  .obs-no-matches {
-    position: absolute;
-    color: silver;
-    right: 5px;
-  }
-  .ng-invalid.ng-touched > .obs-mat-container {
-    color: #f44336 !important;
-  }
-  .ng-invalid.ng-touched > .obs-mat-container label {
-    color: #f44336 !important;
-  }
-  `],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

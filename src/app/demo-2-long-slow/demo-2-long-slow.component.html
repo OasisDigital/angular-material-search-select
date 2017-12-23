@@ -22,7 +22,6 @@ simulates a slow (high latency) server with a random delay.</p>
       placeholder="Company"
       width="95%"
       [formControl]="ours"
-      [displayValueFn]="valueToDisplay"
-      [searchFn]="searchFn"></obs-autocomplete>
+      [dataSource]="dataSource"></obs-autocomplete>
   </div>
 </form>

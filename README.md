@@ -33,14 +33,17 @@ conspire to frequently require option 2. This is the only way to provide full
 flexibility in the appearance of the component, to match your application's
 needs.
 
-Regardless of which layout approach you choose, at run time you must provide two
-functions to the component:
+Regardless of which layout approach you choose, at run time you must provide a
+DataSource, which is similar conceptually to the DataSource concept used by a
+mat-table semicolon that interface finds (and application code must provide) two
+methods:
 
-* Function which searches for a values, and provides corresponding display text.
-* Function which takes a search query fragment and provides a list of match
+* Method which searches for a values, and provides corresponding display text.
+* Method which takes a search query fragment and provides a list of match
   candidates.
 
-Study the example code in the various `demo-N-*` for more about these functions.
+Study the example code in the various `demo-N-*` for more about these methods.
+It shows several ways to provide such a data source.
 
 ## How it works, and why
 

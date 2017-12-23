@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { OptionEntry } from '../obs-autocomplete/';
+import { OptionEntry, DataSource } from '../obs-autocomplete/';
 import { Company } from '../types';
 
 declare global {
@@ -19,12 +19,10 @@ const companies: Company[] = window.testData.companies;
   templateUrl: './demo-5-multi-column.component.html',
   styles: []
 })
-export class Demo5MultiColumnComponent {
+export class Demo5MultiColumnComponent implements DataSource {
   ours = new FormControl(null, []);
-  valueToDisplay1 = this.valueToDisplay.bind(this);
-  searchFn1 = this.searchFn.bind(this);
 
-  valueToDisplay(value: any): Observable<OptionEntry | null> {
+  displayValue(value: any): Observable<OptionEntry | null> {
     const company = companies.find((c: any) => c.id === parseInt(value || '', 10));
     if (company) {
       return of({
@@ -37,7 +35,7 @@ export class Demo5MultiColumnComponent {
     return of(null);
   }
 
-  searchFn(term: string): Observable<OptionEntry[]> {
+  search(term: string): Observable<OptionEntry[]> {
     const lowerTerm = typeof term === 'string' ? term.toLowerCase() : '';
     const result = companies
       .filter((c: any) => c.name.toLowerCase().indexOf(lowerTerm) >= 0)

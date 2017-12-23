@@ -22,7 +22,6 @@
       placeholder="Person"
       emptyText="(No matches)"
       [formControl]="ours"
-      [displayValueFn]="valueToDisplay"
-      [searchFn]="searchFn"></obs-autocomplete>
+      [dataSource]="this"></obs-autocomplete>
   </div>
 </form>

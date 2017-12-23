@@ -1,0 +1,26 @@
+.bigger-mat-ac.mat-autocomplete-panel {
+    max-height: 500px !important;
+}
+
+.obs-mat-container {
+    position: relative;
+}
+
+.obs-mat-container mat-spinner.obs-mat-spinner {
+    position: absolute;
+    right: 5px;
+}
+
+.obs-no-matches {
+    position: absolute;
+    color: silver;
+    right: 5px;
+}
+
+.ng-invalid.ng-touched>.obs-mat-container {
+    color: #f44336 !important;
+}
+
+.ng-invalid.ng-touched>.obs-mat-container label {
+    color: #f44336 !important;
+}

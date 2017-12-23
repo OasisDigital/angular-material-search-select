@@ -7,10 +7,7 @@ export interface OptionEntry {
   details: any;
 }
 
-export interface SearchResult {
-  list?: OptionEntry[];
-  errorMessage?: string;
+export interface DataSource {
+  displayValue: (value: any) => Observable<OptionEntry | null>;
+  search: (term: string) => Observable<OptionEntry[]>;
 }
-
-export type DisplayValueFn = (value: any) => Observable<OptionEntry | null>;
-export type SearchFn = (term: string) => Observable<OptionEntry[]>;

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
 
-import { OptionEntry } from '../obs-autocomplete/';
+import { OptionEntry, DataSource } from '../obs-autocomplete/';
 import { HttpClient } from '@angular/common/http';
 
 export interface Employee {
@@ -24,43 +24,42 @@ const apiURL = 'https://api.angularbootcamp.com/employees';
 })
 export class Demo3RealApiComponent {
   ours = new FormControl(null, [Validators.required]);
-  valueToDisplay1 = this.valueToDisplay.bind(this);
-  searchFn1 = this.searchFn.bind(this);
+  dataSource: DataSource;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(http: HttpClient) {
 
-  valueToDisplay(value: any): Observable<OptionEntry | null> {
-    if (typeof value === 'string') {
-      value = parseInt(value, 10);
-    }
-    if (typeof value !== 'number') {
-      return of(null);
-    }
+    this.dataSource = {
+      displayValue(value: any): Observable<OptionEntry | null> {
+        if (typeof value === 'string') {
+          value = parseInt(value, 10);
+        }
+        if (typeof value !== 'number') {
+          return of(null);
+        }
 
-    return this.http.get<Employee>(apiURL + '/' + value).pipe(
-      map(e => ({
-        value: e.id,
-        display: `${e.first_name} ${e.last_name} (${e.email})`,
-        details: {},
-        match: true
-      }))
-    );
-  }
-
-  searchFn(term: string): Observable<OptionEntry[]> {
-    return this.http.get<Employee[]>(apiURL, {
-      params: {
-        q: term || '',
-        _sort: 'last_name,first_name'
+        return http.get<Employee>(apiURL + '/' + value).pipe(
+          map(e => ({
+            value: e.id,
+            display: `${e.first_name} ${e.last_name} (${e.email})`,
+            details: {},
+            match: true
+          }))
+        );
+      },
+      search(term: string): Observable<OptionEntry[]> {
+        return http.get<Employee[]>(apiURL, {
+          params: {
+            q: term || '',
+            _sort: 'last_name,first_name'
+          }
+        }).pipe(
+          map(list => list.map(e => ({
+            value: e.id,
+            display: `${e.first_name} ${e.last_name} (${e.email})`,
+            details: {},
+            match: (e.first_name + ' ' + e.last_name) === term
+          }))));
       }
-    }).pipe(
-      map(list => list.map(e => ({
-        value: e.id,
-        display: `${e.first_name} ${e.last_name} (${e.email})`,
-        details: {},
-        match: (e.first_name + ' ' + e.last_name) === term
-      })))
-      );
+    };
   }
 }
