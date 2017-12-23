@@ -7,7 +7,7 @@ let companies = [];
 for (let i = 0; i < 10000; i++) {
   companies.push({
     id: i,
-    name: faker.company.companyName(),
+    name: faker.company.companyName() + ' ' + faker.company.companySuffix(),
     address: faker.address.streetAddress(),
     city: faker.address.city(),
     state: faker.address.state(),

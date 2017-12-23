@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-explanation',
+  selector: 'obs-explanation',
   templateUrl: './explanation.component.html',
   styles: []
 })
-export class ExplanationComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class ExplanationComponent {
 
 }

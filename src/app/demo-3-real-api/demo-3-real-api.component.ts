@@ -3,9 +3,9 @@ import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 import { OptionEntry, DataSource } from '../obs-autocomplete/';
-import { HttpClient } from '@angular/common/http';
 
 export interface Employee {
   id: number;

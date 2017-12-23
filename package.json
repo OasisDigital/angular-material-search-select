@@ -18,10 +18,10 @@
     "start": "run-s generate serve",
     "build-demo": "ng build --prod --base-href /angular-material-obs-autocomplete/",
     "gh-pages": "gh-pages -d dist",
-    "deploy-demo": "run-s build-demo gh-pages",
+    "deploy-demo": "run-s lint build-demo gh-pages",
     "packagr": "ng-packagr -p ng-package.json",
     "streamline": "ts-node streamline_dist_package",
-    "build": "run-s packagr streamline",
+    "build": "run-s lint packagr streamline",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
