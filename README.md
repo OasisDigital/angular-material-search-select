@@ -40,6 +40,9 @@ mat-table; that interface defines (and application code must provide) methods:
 * Method which searches for a values, and provides corresponding display text.
 * Method which takes a search query fragment and provides a list of match
   candidates.
+* Optionally, a match method that can widen the definition of a matching entry -
+  for example, make it a user can type an entry that varies from a list entry
+  only in upper/lowercase.
 
 Study the example code in the various `demo-N-*` for more about these methods.
 It shows several ways to provide such a data source.

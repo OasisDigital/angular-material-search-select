@@ -53,4 +53,11 @@ export class Demo1SimpleFastComponent implements DataSource {
       timer(Math.random() * 300 + 100)
     ));
   }
+
+  // This custom match function makes it possible for the user to type "one" to
+  // match an entry "One".
+
+  match(search: string, entry: OptionEntry) {
+    return entry.display && search.toLowerCase() === entry.display.toLowerCase() || false;
+  }
 }

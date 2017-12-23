@@ -36,16 +36,27 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
   errorMessage: Observable<string | undefined>;
 
   focus() {
+    // While focused, user selection will be propagated to the form.
     this.selectedValueSub = this.selectedValue.subscribe(this.checkAndPropagate.bind(this));
   }
 
   blur() {
     this.onTouched();
+    // Now that we've lost focus, stop propagating changes.
     if (this.selectedValueSub) {
       this.selectedValueSub.unsubscribe();
     }
-    setTimeout(() =>
-      this.selectedValue.pipe(take(1)).subscribe(this.checkAndPropagate.bind(this)));
+    // However, it's possible the user has just typed some text that will be
+    // confirmed (by the application provided function) as a match,
+    // asynchronously. We can't force the system to wait for that to happen, we
+    // are losing focus right now. But we can subscribe to pick up that one last
+    // change and propagate it if/when it arrives.
+    this.selectedValue
+      .pipe(take(1))
+      .subscribe(this.checkAndPropagate.bind(this));
+    // However, this code raises an important question about valid behavior of a
+    // Angular form control. Is it acceptable for a form control to
+    // asynchronously provide a new value when it no longer has focus?
   }
 
   displayWith(value: OptionEntry): string {
@@ -79,13 +90,13 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
       this.incomingDataSources.pipe(filter(ds => !!ds)),
     ).pipe(
       switchMap(([srch, ds]) => {
-        // Initial value is sometimes null
+        // Initial value is sometimes null.
         if (srch === null) {
           srch = '';
         }
         if (typeof srch === 'string') {
           const search: string = srch;
-          // Typing into input sends simple strings,
+          // Typing into input sends strings.
           return ds.search(srch).pipe(
             map(list => ({ search, list })),
             catchError(errorMessage => of({ search, errorMessage })),
@@ -93,7 +104,7 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
           );
         }
 
-        // selecting from Material Option list provides objects, so there is
+        // Selecting from Material Option List sends an object, so there is
         // no need to call function to search for it.
         const entry = srch as OptionEntry;
         return of<SearchResult>({
@@ -105,11 +116,17 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
       refCount()
       );
 
+    function matcher(search: string, entry: OptionEntry) {
+      return entry.display === search;
+    }
+
     this.selectedValue = options.pipe(
       filter(result => !!result.list),
-      map(result => {
+      withLatestFrom(this.incomingDataSources),
+      map(([result, ds]) => {
         const list = result.list || []; // appease TS
-        const entry = list.find(option => option.display === result.search);
+        const matchFn = ds.match || matcher;
+        const entry = list.find(option => matchFn(result.search, option));
         return entry && entry.value || null;
       }),
       distinctUntilChanged()
@@ -120,12 +137,11 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
     this.empty = options.pipe(map(o => o.list ? o.list.length === 0 : false));
     this.errorMessage = options.pipe(map(o => o.errorMessage));
 
-    // a value is provided from outside; request the full entry
-    this.incomingDataSourcesSub = this.incomingValues
-      .pipe(
+    // a value was provided by the form; request the full entry
+    this.incomingDataSourcesSub = this.incomingValues.pipe(
       withLatestFrom(this.incomingDataSources),
       switchMap<[any, DataSource], OptionEntry>(([value, ds]) => ds.displayValue(value))
-      )
+    )
       .subscribe(value => this.searchControl.setValue(value));
   }
 

@@ -9,4 +9,5 @@ export interface OptionEntry {
 export interface DataSource {
   displayValue: (value: any) => Observable<OptionEntry | null>;
   search: (term: string) => Observable<OptionEntry[]>;
+  match?: (search: string, entry: OptionEntry) => boolean;
 }
