@@ -14,8 +14,24 @@ simulates a slow (high latency) server with a random delay.</p>
     <button (click)="ours.setValue(manual.value)">Set</button>
   </div>
 
-  <p>search stream source swapping</p>
-  <button (click)="swapSources()">Swap short and long</button>
+  <!--
+    Ideally we could experiment with the value using bound form controls,
+    but the following Angular bug makes this not work.
+
+    https://github.com/angular/angular/issues/13792
+
+  <mat-form-field>
+    <input matInput [formControl]="ours" type="text" placeholder="Value1">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [formControl]="ours" type="text" placeholder="Value2">
+  </mat-form-field>
+  -->
+
+  <div class="set-apart">
+    <button (click)="swapSources()">Swap short and long data sources</button> (see code)
+  </div>
 
   <div class="set-apart">
     <obs-autocomplete

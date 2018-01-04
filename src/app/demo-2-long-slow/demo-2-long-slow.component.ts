@@ -40,8 +40,8 @@ export class Demo2LongSlowComponent {
     const companiesToSearch = companies.slice(0, this.companyLimit);
     const dataSource: DataSource = {
       displayValue(value: any): Observable<OptionEntry | null> {
-        // TODO number vs string issue below
-        const company = companies.find((c: any) => c.id === value);
+        const id = Number(value);
+        const company = companies.find((c: any) => c.id === id);
         if (company) {
           return of({
             value: company.id,
