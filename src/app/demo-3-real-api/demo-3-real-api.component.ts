@@ -32,6 +32,7 @@ export class Demo3RealApiComponent {
 
     this.dataSource = {
       displayValue(value: any): Observable<OptionEntry | null> {
+        console.log('finding display value for', value);
         if (typeof value === 'string') {
           value = parseInt(value, 10);
         }
@@ -48,6 +49,7 @@ export class Demo3RealApiComponent {
         );
       },
       search(term: string): Observable<OptionEntry[]> {
+        console.log('searching for', term);
         return http.get<Employee[]>(apiURL, {
           params: {
             q: term || '',

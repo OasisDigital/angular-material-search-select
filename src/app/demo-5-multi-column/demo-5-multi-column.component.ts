@@ -23,6 +23,7 @@ export class Demo5MultiColumnComponent implements DataSource {
   companyControl = new FormControl(null, []);
 
   displayValue(value: any): Observable<OptionEntry | null> {
+    console.log('finding display value for', value);
     const company = companies.find((c: any) => c.id === parseInt(value || '', 10));
     if (company) {
       return of({
@@ -35,6 +36,7 @@ export class Demo5MultiColumnComponent implements DataSource {
   }
 
   search(term: string): Observable<OptionEntry[]> {
+    console.log('searching for', term);
     const lowerTerm = typeof term === 'string' ? term.toLowerCase() : '';
     const result = companies
       .filter((c: any) => c.name.toLowerCase().indexOf(lowerTerm) >= 0)

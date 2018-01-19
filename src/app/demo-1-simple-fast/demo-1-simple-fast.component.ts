@@ -31,6 +31,7 @@ export class Demo1SimpleFastComponent implements DataSource {
   // a single autocomplete component.
 
   displayValue(value: any): Observable<OptionEntry | null> {
+    console.log('finding display value for', value);
     if (value === '333') {
       return of(null);
     }
@@ -43,6 +44,7 @@ export class Demo1SimpleFastComponent implements DataSource {
   }
 
   search(term: string): Observable<OptionEntry[]> {
+    console.log('searching for', term);
     if (term === 'error') {
       return _throw('testing');
     }

@@ -40,6 +40,7 @@ export class Demo2LongSlowComponent {
     const companiesToSearch = companies.slice(0, this.companyLimit);
     const dataSource: DataSource = {
       displayValue(value: any): Observable<OptionEntry | null> {
+        console.log('finding display value for', value);
         const id = Number(value);
         const company = companies.find((c: any) => c.id === id);
         if (company) {
@@ -53,6 +54,7 @@ export class Demo2LongSlowComponent {
       },
 
       search(term: string): Observable<OptionEntry[]> {
+        console.log('searching for', term);
         if (term === 'error') {
           return _throw('testing');
         }
