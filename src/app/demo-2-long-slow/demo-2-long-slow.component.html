@@ -36,6 +36,7 @@ simulates a slow (high latency) server with a random delay.</p>
   <div class="set-apart">
     <obs-autocomplete
       placeholder="Company"
+      debounceTime="500"
       width="95%"
       [formControl]="ours"
       [dataSource]="dataSource"></obs-autocomplete>

@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { of } from 'rxjs/observable/of';
+import { empty } from 'rxjs/observable/empty';
 import { timer } from 'rxjs/observable/timer';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { switchMap, startWith, catchError, map, filter, debounce, take, refCount, withLatestFrom } from 'rxjs/operators';
@@ -82,7 +83,13 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
       this.searchControl.valueChanges.pipe(
         startWith(this.searchControl.value),
         distinctUntilChanged(),
-        debounce(_x => timer(this.debounceTime))
+        debounce(srch => {
+          // Typing into input sends strings.
+          if (typeof srch === 'string') {
+            return timer(this.debounceTime);
+          }
+          return empty(); // immediate - no debounce for choosing from the list
+        })
       );
 
     const options: Observable<SearchResult> = combineLatest(
@@ -94,9 +101,9 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
         if (srch === null) {
           srch = '';
         }
+        // Typing into input sends strings.
         if (typeof srch === 'string') {
           const search: string = srch;
-          // Typing into input sends strings.
           return ds.search(srch).pipe(
             map(list => ({ search, list })),
             catchError(errorMessage => of({ search, errorMessage })),
@@ -114,7 +121,7 @@ export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
       }),
       publishReplay(1),
       refCount()
-      );
+    );
 
     function matcher(search: string, entry: OptionEntry) {
       return entry.display === search;
