@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   MatAutocompleteModule,
@@ -15,7 +14,6 @@ import { AutocompleteComponent } from './obs-autocomplete.component';
 @NgModule({
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
