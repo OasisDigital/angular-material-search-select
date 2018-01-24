@@ -22,7 +22,7 @@ import { Demo2LongSlowComponent } from './demo-2-long-slow/demo-2-long-slow.comp
 import { Demo3RealApiComponent } from './demo-3-real-api/demo-3-real-api.component';
 import { Demo4CascadeComponent } from './demo-4-cascade/demo-4-cascade.component';
 import { Demo5MultiColumnComponent } from './demo-5-multi-column/demo-5-multi-column.component';
-import { SelectCompanyComponent } from './select-company/select-company.component';
+import { SelectCompanyCssTableComponent } from './select-company-css-table/select-company-css-table.component';
 import { ExplanationComponent } from './explanation/explanation.component';
 
 const routes: Routes = [
@@ -44,7 +44,7 @@ const routes: Routes = [
     Demo3RealApiComponent,
     Demo4CascadeComponent,
     Demo5MultiColumnComponent,
-    SelectCompanyComponent,
+    SelectCompanyCssTableComponent,
     ExplanationComponent
   ],
   imports: [

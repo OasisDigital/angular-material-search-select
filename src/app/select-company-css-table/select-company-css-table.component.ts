@@ -3,17 +3,17 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ObsAutocompleteBase } from '../obs-autocomplete/';
 
 @Component({
-  selector: 'obs-select-company',
-  templateUrl: './select-company.component.html',
+  selector: 'obs-select-company-css-table',
+  templateUrl: './select-company-css-table.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SelectCompanyComponent),
+      useExisting: forwardRef(() => SelectCompanyCssTableComponent),
       multi: true
     }
   ],
   styles: [],
   encapsulation: ViewEncapsulation.None
 })
-export class SelectCompanyComponent extends ObsAutocompleteBase {
+export class SelectCompanyCssTableComponent extends ObsAutocompleteBase {
 }

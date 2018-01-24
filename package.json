@@ -39,7 +39,7 @@
     "@angular-devkit/schematics": "0.0.48",
     "@angular/animations": "^5.2.1",
     "@angular/cdk": "^5.1.0",
-    "@angular/cli": "1.6.4",
+    "@angular/cli": "1.6.5",
     "@angular/common": "^5.2.1",
     "@angular/compiler": "^5.2.1",
     "@angular/compiler-cli": "^5.2.1",
