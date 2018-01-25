@@ -1,0 +1,32 @@
+:host {
+  display: block;
+}
+
+.company-mat-table mat-cell {
+  overflow: none !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Fix the header... but not in IE. */
+/* Ideally a future mat-table will support a fixed header in the box. */
+
+.company-mat-table .mat-header-row {
+  top: 0;
+  position: sticky;
+  z-index: 1;
+  background-color: inherit;
+}
+
+/* mat-table generates these class names so that columns can be targetted from CSS. */
+
+.company-mat-table .mat-column-name {
+  flex: 3;
+}
+
+.company-mat-table .mat-column-city {
+  flex: 2;
+}
+
+.company-mat-table .mat-column-state {
+  flex: 1;
+}

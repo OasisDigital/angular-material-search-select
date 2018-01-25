@@ -1,0 +1,49 @@
+<mat-form-field class="obs-mat-container" style="width: 600px">
+  <mat-spinner class="obs-mat-spinner"
+    *ngIf="loading | async"
+    [diameter]="20"
+    [strokeWidth]="5"></mat-spinner>
+  <input
+      type="text"
+      placeholder="Company"
+      attr.aria-label="Company"
+      spellcheck="false"
+      matInput
+      [formControl]="searchControl"
+      #input
+      (blur)="blur()"
+      (focus)="input.select(); focus()"
+      [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith" class="bigger-mat-ac">
+
+    <mat-table [dataSource]="this" class="company-mat-table">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let opt">
+          {{opt.details.name}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+        <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
+        <mat-cell *matCellDef="let opt">
+          {{opt.details.city}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="state">
+        <mat-header-cell *matHeaderCellDef>State</mat-header-cell>
+        <mat-cell *matCellDef="let opt">
+          {{opt.details.state}}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-option *matRowDef="let opt; columns: displayedColumns" [value]="opt">
+        <mat-row></mat-row>
+      </mat-option>
+    </mat-table>
+
+  </mat-autocomplete>
+  <b>{{ errorMessage | async }}</b>
+</mat-form-field>
