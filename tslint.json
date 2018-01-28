@@ -121,13 +121,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "obs",
+      ["search", "obs"],
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "obs",
+      ["search", "obs"],
       "kebab-case"
     ],
     "use-input-property-decorator": true,

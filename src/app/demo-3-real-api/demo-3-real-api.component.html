@@ -1,7 +1,7 @@
-<h2>Observable autocomplete, Real (OData) API</h2>
+<h2>Search select with real (remote) API data</h2>
 
 <p>This demo screen calls a JSON-server API we have hosted on the Internet with
-proper CORS support. It illustrates how to use the observable auto complete with
+proper CORS support. It illustrates how to use the search select with
 a server-side API.</p>
 
 <form>
@@ -15,10 +15,10 @@ a server-side API.</p>
   </div>
 
   <div class="set-apart">
-    <obs-autocomplete
+    <search-select
       placeholder="Company"
       width="95%"
       [formControl]="ours"
-      [dataSource]="dataSource"></obs-autocomplete>
+      [dataSource]="dataSource"></search-select>
   </div>
 </form>

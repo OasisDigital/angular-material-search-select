@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { OptionEntry, DataSource } from '../obs-autocomplete/';
+import { OptionEntry, DataSource } from '../search-select/';
 import { Company } from '../types';
 
 declare global {

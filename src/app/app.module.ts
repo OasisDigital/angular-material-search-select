@@ -13,10 +13,10 @@ import {
   MatButtonModule
 } from '@angular/material';
 import { Routes, RouterModule } from '@angular/router';
-
-import { ObsAutocompleteModule } from './obs-autocomplete/';
-import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+
+import { SearchSelectModule } from './search-select/';
+import { AppComponent } from './app.component';
 import { Demo0MaterialSampleComponent } from './demo-0-material-sample/demo-0-material-sample.component';
 import { Demo1SimpleFastComponent } from './demo-1-simple-fast/demo-1-simple-fast.component';
 import { Demo2LongSlowComponent } from './demo-2-long-slow/demo-2-long-slow.component';
@@ -63,7 +63,7 @@ const routes: Routes = [
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    ObsAutocompleteModule,
+    SearchSelectModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],

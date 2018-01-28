@@ -1,22 +1,22 @@
 {
-  "name": "angular-material-obs-autocomplete",
-  "version": "0.11.3",
+  "name": "@oasisdigital/angular-material-search-select",
+  "version": "0.12.0",
   "author": "Kyle Cordes <kyle.cordes@oasisdigital.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://git@github.com:OasisDigital/angular-material-obs-autocomplete.git"
+    "url": "git://git@github.com:OasisDigital/angular-material-search-select.git"
   },
   "bugs": {
-    "url": "https://github.com/OasisDigital/angular-material-obs-autocomplete/issues"
+    "url": "https://github.com/OasisDigital/angular-material-search-select/issues"
   },
-  "homepage": "https://github.com/OasisDigital/angular-material-obs-autocomplete",
+  "homepage": "https://github.com/OasisDigital/angular-material-search-select",
   "scripts": {
     "ng": "ng",
     "generate": "ts-node generate_data",
     "serve": "ng serve --host 0.0.0.0 --disable-host-check",
     "start": "run-s generate serve",
-    "build-demo": "ng build --prod --base-href /angular-material-obs-autocomplete/",
+    "build-demo": "ng build --prod --base-href /angular-material-search-select/",
     "gh-pages": "gh-pages -d dist",
     "deploy-demo": "run-s lint build-demo gh-pages",
     "packagr": "ng-packagr -p ng-package.json",

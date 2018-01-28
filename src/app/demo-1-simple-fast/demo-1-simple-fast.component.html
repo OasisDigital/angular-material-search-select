@@ -1,8 +1,7 @@
-<h2>Observable autocomplete, simple fast list</h2>
+<h2>Search-select of a short, fast list</h2>
 
-<p>This example shows the observable autocomplete with a short, local (and
-therefore, instantaneous) option list. In this usage, it is not very different
-from the default autocomplete.</p>
+<p>This example shows the search select with a short, local (and therefore,
+instantaneous) option list.</p>
 
 <form>
   <div>Value: {{ { value: ours.value } | json }}
@@ -21,10 +20,10 @@ from the default autocomplete.</p>
   </div>
 
   <div class="set-apart">
-    <obs-autocomplete
+    <search-select
       placeholder="Person"
       emptyText="(No matches)"
       [formControl]="ours"
-      [dataSource]="this"></obs-autocomplete>
+      [dataSource]="this"></search-select>
   </div>
 </form>

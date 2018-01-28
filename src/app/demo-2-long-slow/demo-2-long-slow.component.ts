@@ -6,7 +6,7 @@ import { _throw } from 'rxjs/observable/throw';
 import { delayWhen } from 'rxjs/operators';
 import { timer } from 'rxjs/observable/timer';
 
-import { OptionEntry, DataSource } from '../obs-autocomplete/';
+import { OptionEntry, DataSource } from '../search-select/';
 
 declare global {
   interface Window {

@@ -1,6 +1,6 @@
 import { Component, forwardRef, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ObsAutocompleteBase } from '../obs-autocomplete/';
+import { SearchSelectBase } from '../search-select/';
 
 @Component({
   selector: 'obs-select-company-css-table',
@@ -15,5 +15,5 @@ import { ObsAutocompleteBase } from '../obs-autocomplete/';
   styles: [],
   encapsulation: ViewEncapsulation.None
 })
-export class SelectCompanyCssTableComponent extends ObsAutocompleteBase {
+export class SelectCompanyCssTableComponent extends SearchSelectBase {
 }

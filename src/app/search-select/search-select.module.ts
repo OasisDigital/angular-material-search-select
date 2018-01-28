@@ -9,7 +9,7 @@ import {
   MatTooltipModule
 } from '@angular/material';
 
-import { AutocompleteComponent } from './obs-autocomplete.component';
+import { SearchSelectComponent } from './search-select.component';
 
 @NgModule({
   imports: [
@@ -23,10 +23,10 @@ import { AutocompleteComponent } from './obs-autocomplete.component';
     ReactiveFormsModule
   ],
   declarations: [
-    AutocompleteComponent
+    SearchSelectComponent
   ],
   exports: [
-    AutocompleteComponent
+    SearchSelectComponent
   ]
 })
-export class ObsAutocompleteModule { }
+export class SearchSelectModule { }

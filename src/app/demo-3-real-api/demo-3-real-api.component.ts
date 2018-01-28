@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
-import { OptionEntry, DataSource } from '../obs-autocomplete/';
+import { OptionEntry, DataSource } from '../search-select/';
 
 export interface Employee {
   id: number;

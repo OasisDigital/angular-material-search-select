@@ -1,27 +1,43 @@
-# angular-material-obs-autocomplete
+# Angular Material Search-select control
 
-This library provides a means to use the Angular Material mat-autocomplete
-component, in cases where the options to be populated must arrive asynchronously
-(for example, because they come from a server). The resulting behavior is more
-like a server-side "search select", in that it is intended to allow entry of
-only developer approved values.
+This library implements a "search select" or "select with search" control, to
+match (and building on) Angular Material. To provide the UI, the Material
+mat-autocomplete control is used; but the result is not quite an autocomplete
+per se, it really is a search select, intended to pick an item from a list.
+
+## How it works, and why
+
+This control handles cases where the displayed 'name' does not match the
+internal ID. As a developer using this control, you supply methods to translate
+from ID to displayed name, and to search data during selection.
+
+Both directions of data lookup/search are handles asyncronously, suitable for a
+database-based, long list of searchable items.
+
+We have found this problem comes up regularly on our projects, and have finally
+created this reusable solution. This repository/project contains both the
+component itself, and screens that demonstrate its use.
 
 ## Try it
 
 Demo running at:
 
-https://oasisdigital.github.io/angular-material-obs-autocomplete/
+https://oasisdigital.github.io/angular-material-search-select/
 
 NPM package:
 
-https://www.npmjs.com/package/angular-material-obs-autocomplete
+https://www.npmjs.com/package/@oasisdigital/angular-material-search-select
 
 ## To use this in a project
 
-There are two ways to consume the code here. You can see examples of them in the
+```
+npm install --save @oasisdigital/angular-material-search-select
+```
+
+There are two ways to consume this code. You can see examples of them in the
 various tabs of the demo. 
 
-1. Use the provided obs-autocomplete component, as shown in "simple", "Long
+1. Use the provided search-select component, as shown in "simple", "Long
    slow", "real API".
 2. Write a custom component using only the base class provided in this package;
    your component will provide all the visuals, but typically doesn't need to
@@ -47,30 +63,18 @@ mat-table; that interface defines (and application code must provide) methods:
 Study the example code in the various `demo-N-*` for more about these methods.
 It shows several ways to provide such a data source.
 
-## How it works, and why
-
-To behave correctly, this component must accommodate the asynchronous nature of
-the lookup data. This turns out to be rather complex.
-
-We have found this problem comes up regularly on our projects, and have finally
-created a generic solution, reusable. It is not ultimately reusable though,
-because it is bound to Angular Material, which we use on many projects.
-
-This repository/project contains both the component itself, and screens that
-demonstrate its use.
-
 ## Also an example of how to publish a component
 
 In addition to being a useful component, we have been using this repository as
 an example of how to publish a Angular component to NPM. You can see these
 patterns in use here, and borrow them for other components:
 
-* Use ng-packagr. Outsource much of the complexity in bundling to that brilliant
-  package.
-* Start with a Angular CLI project.
+* Start with an Angular CLI project.
 * Add a module inside, for the components to be packaged.
 * Make the overall application provide a demo, test environment, etc. for
-  the components.
+  the components in the to-be-packaged module.
+* Use ng-packagr: outsource the complexity in bundling to that brilliant
+  package.
 
 ## Who?
 

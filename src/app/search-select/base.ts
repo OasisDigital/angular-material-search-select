@@ -24,7 +24,7 @@ interface SearchResult {
   errorMessage?: string;
 }
 
-export class ObsAutocompleteBase implements ControlValueAccessor, OnDestroy {
+export class SearchSelectBase implements ControlValueAccessor, OnDestroy {
   @Input() debounceTime = 75;
   @Input() set dataSource(ds: DataSource) { this.incomingDataSources.next(ds); }
 

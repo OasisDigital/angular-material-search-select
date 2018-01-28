@@ -1,6 +1,6 @@
 # Contributing
 
-Contribute in the usual way, by opening issues, or treating PRs.
+Contribute in the usual way, by opening issues, or creating PRs.
 
 
 # Notes for project owner

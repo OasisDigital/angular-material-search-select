@@ -2,7 +2,7 @@ import { Component, forwardRef, Input, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DataSource } from '@angular/cdk/collections';
 
-import { ObsAutocompleteBase, OptionEntry } from '../obs-autocomplete/';
+import { SearchSelectBase, OptionEntry } from '../search-select/';
 import { map, filter } from 'rxjs/operators';
 
 @Component({
@@ -18,7 +18,7 @@ import { map, filter } from 'rxjs/operators';
   ],
   encapsulation: ViewEncapsulation.None
 })
-export class SelectCompanyMatGridComponent extends ObsAutocompleteBase implements DataSource<OptionEntry> {
+export class SelectCompanyMatGridComponent extends SearchSelectBase implements DataSource<OptionEntry> {
   @Input() placeholder: string;
   @Input() width: string;
 

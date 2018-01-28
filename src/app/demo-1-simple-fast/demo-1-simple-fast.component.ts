@@ -6,7 +6,12 @@ import { _throw } from 'rxjs/observable/throw';
 import { delayWhen } from 'rxjs/operators';
 import { timer } from 'rxjs/observable/timer';
 
-import { OptionEntry, DataSource } from '../obs-autocomplete/';
+// Demo - import directly from sibling code
+import { OptionEntry, DataSource } from '../search-select/';
+
+// Real applications:
+// import { OptionEntry, DataSource } from '@oasisdigital/angular-material-search-select/';
+
 import { shortOptions } from '../short-options';
 
 @Component({
