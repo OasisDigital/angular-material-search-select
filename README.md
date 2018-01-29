@@ -5,6 +5,10 @@ match (and building on) Angular Material. To provide the UI, the Material
 mat-autocomplete control is used; but the result is not quite an autocomplete
 per se, it really is a search select, intended to pick an item from a list.
 
+## Video demo and explanation
+
+[![Video explaining search-select](https://img.youtube.com/vi/cB2tt-owGbg/0.jpg)](https://www.youtube.com/watch?v=cB2tt-owGbg)
+
 ## How it works, and why
 
 This control handles cases where the displayed 'name' does not match the
