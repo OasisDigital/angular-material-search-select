@@ -40,12 +40,23 @@ export class Demo1SimpleFastComponent implements DataSource {
     if (value === '333') {
       return of(null);
     }
-    const display = value ? value + '!' : '';
-    return of({
-      value,
-      display,
-      details: {}
-    });
+    if (value) {
+      let display = '';
+      value = parseInt(value, 10);
+      for (let idx in this.options) {
+        if (this.options[idx] && this.options[idx].value === value) {
+          display = this.options[idx].display;
+          break;
+        }
+      }
+      return of({
+        value,
+        display,
+        details: {}
+      });
+    } else {
+      return of(null);
+    }
   }
 
   search(term: string): Observable<OptionEntry[]> {
