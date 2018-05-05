@@ -4,17 +4,15 @@
 
 import { Input, OnDestroy } from '@angular/core';
 import { FormControl, ControlValueAccessor } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { of } from 'rxjs/observable/of';
-import { empty } from 'rxjs/observable/empty';
-import { timer } from 'rxjs/observable/timer';
-import { combineLatest } from 'rxjs/observable/combineLatest';
-import { switchMap, startWith, catchError, map, filter, debounce, take, refCount, withLatestFrom } from 'rxjs/operators';
-import { Subject } from 'rxjs/Subject';
-import { publishReplay } from 'rxjs/operators/publishReplay';
-import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
+import {
+  Subscription, Observable, BehaviorSubject, of,
+  EMPTY, timer, combineLatest, Subject
+} from 'rxjs';
+import {
+  switchMap, startWith, catchError, map, filter,
+  debounce, take, refCount, withLatestFrom,
+  publishReplay, distinctUntilChanged
+} from 'rxjs/operators';
 
 import { OptionEntry, DataSource } from './types';
 
@@ -88,7 +86,7 @@ export class SearchSelectBase implements ControlValueAccessor, OnDestroy {
           if (typeof srch === 'string') {
             return timer(this.debounceTime);
           }
-          return empty(); // immediate - no debounce for choosing from the list
+          return EMPTY; // immediate - no debounce for choosing from the list
         })
       );
 

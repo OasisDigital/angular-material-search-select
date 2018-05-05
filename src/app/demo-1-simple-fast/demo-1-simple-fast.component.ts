@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { _throw } from 'rxjs/observable/throw';
+import { Observable, of, throwError as _throw, timer } from 'rxjs';
 import { delayWhen } from 'rxjs/operators';
-import { timer } from 'rxjs/observable/timer';
 
 // Demo - import directly from sibling code
 import { OptionEntry, DataSource } from '../search-select/';
@@ -43,7 +40,7 @@ export class Demo1SimpleFastComponent implements DataSource {
     if (value) {
       let display = '';
       value = parseInt(value, 10);
-      for (let idx in this.options) {
+      for (const idx in this.options) {
         if (this.options[idx] && this.options[idx].value === value) {
           display = this.options[idx].display;
           break;

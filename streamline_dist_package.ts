@@ -9,7 +9,6 @@ const stringify = require('json-stable-stringify');
 const fName = './dist/package.json';
 const data = require(fName);
 
-delete data.scripts;
 delete data.devDependencies;
 delete data.engines;
 data.private = false; // so the source package can keep private: true
