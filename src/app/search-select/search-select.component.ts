@@ -31,4 +31,5 @@ export class SearchSelectComponent extends SearchSelectBase {
   @Input() debounceTime = 100;
   @Input() width = '';
   @Input() emptyText = '';
+  @Input() autoActiveFirstOption = false;
 }
