@@ -15,7 +15,9 @@
       (blur)="blur()"
       (focus)="input.select(); focus()"
       [matAutocomplete]="auto">
-  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith" class="bigger-mat-ac">
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith"
+    [autoActiveFirstOption]="autoActiveFirstOption"
+   class="bigger-mat-ac">
     <mat-option *ngFor="let option of list | async"
       [value]="option">
       {{ option.display }}
