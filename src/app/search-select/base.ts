@@ -145,7 +145,7 @@ export class SearchSelectBase implements ControlValueAccessor, OnDestroy {
     // a value was provided by the form; request the full entry
     this.incomingDataSourcesSub = this.incomingValues.pipe(
       withLatestFrom(this.incomingDataSources),
-      switchMap<[any, DataSource], OptionEntry>(([value, ds]) => ds.displayValue(value))
+      switchMap<[any, DataSource], Observable<OptionEntry | null>>(([value, ds]) => ds.displayValue(value))
     )
       .subscribe(value => this.searchControl.setValue(value));
   }
