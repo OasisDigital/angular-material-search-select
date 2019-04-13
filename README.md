@@ -15,7 +15,7 @@ This control handles cases where the displayed 'name' does not match the
 internal ID. As a developer using this control, you supply methods to translate
 from ID to displayed name, and to search data during selection.
 
-Both directions of data lookup/search are handles asyncronously, suitable for a
+Both directions of data lookup/search are handles asynchronously, suitable for a
 database-based, long list of searchable items.
 
 We have found this problem comes up regularly on our projects, and have finally
@@ -46,7 +46,7 @@ various tabs of the demo.
 2. Write a custom component using only the base class provided in this package;
    your component will provide all the visuals, but typically doesn't need to
    provide any code at all. For an example of this, look in the source code,
-   directory `demo-5-multicolumn` and the corresponding multicolumn demo tab.
+   directory `demo-5-multicolumn` and the corresponding multi-column demo tab.
 
 For better or worse, various aspects of HTML, CSS, Angular, and other tools
 conspire to frequently require option 2. This is the only way to provide full
