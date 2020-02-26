@@ -1,21 +1,18 @@
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import {
-  MatAutocompleteModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatProgressSpinnerModule,
-  MatToolbarModule,
-  MatMenuModule,
-  MatTableModule,
-  MatButtonModule
-} from '@angular/material';
-import { Routes, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 
-import { SearchSelectModule } from './search-select/';
 import { AppComponent } from './app.component';
 import { Demo0MaterialSampleComponent } from './demo-0-material-sample/demo-0-material-sample.component';
 import { Demo1SimpleFastComponent } from './demo-1-simple-fast/demo-1-simple-fast.component';
@@ -23,9 +20,10 @@ import { Demo2LongSlowComponent } from './demo-2-long-slow/demo-2-long-slow.comp
 import { Demo3RealApiComponent } from './demo-3-real-api/demo-3-real-api.component';
 import { Demo4CascadeComponent } from './demo-4-cascade/demo-4-cascade.component';
 import { Demo5MultiColumnComponent } from './demo-5-multi-column/demo-5-multi-column.component';
+import { ExplanationComponent } from './explanation/explanation.component';
+import { SearchSelectModule } from './search-select/';
 import { SelectCompanyCssTableComponent } from './select-company-css-table/select-company-css-table.component';
 import { SelectCompanyMatGridComponent } from './select-company-mat-table/select-company-mat-table.component';
-import { ExplanationComponent } from './explanation/explanation.component';
 
 const routes: Routes = [
   { path: '', component: ExplanationComponent, pathMatch: 'full' },

@@ -3,18 +3,17 @@
 // component set, and so on.
 
 import { Input, OnDestroy } from '@angular/core';
-import { FormControl, ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, FormControl } from '@angular/forms';
 import {
-  Subscription, Observable, BehaviorSubject, of,
-  EMPTY, timer, combineLatest, Subject
+  BehaviorSubject, EMPTY, Observable, Subject,
+  Subscription, combineLatest, of, timer
 } from 'rxjs';
 import {
-  switchMap, startWith, catchError, map, filter,
-  debounce, take, refCount, withLatestFrom,
-  publishReplay, distinctUntilChanged
+  catchError, debounce, distinctUntilChanged, filter, map,
+  publishReplay, refCount, startWith, switchMap, take, withLatestFrom
 } from 'rxjs/operators';
 
-import { OptionEntry, DataSource } from './types';
+import { DataSource, OptionEntry } from './types';
 
 interface SearchResult {
   search: string;
@@ -67,7 +66,7 @@ export class SearchSelectBase implements ControlValueAccessor, OnDestroy {
   // tslint:disable:member-ordering
   private incomingValues = new Subject<any>();
   private incomingDataSources = new BehaviorSubject<DataSource>({
-    displayValue: of,
+    displayValue: x => of(x),
     search: () => of([])
   });
 
@@ -90,10 +89,10 @@ export class SearchSelectBase implements ControlValueAccessor, OnDestroy {
         })
       );
 
-    const options: Observable<SearchResult> = combineLatest(
+    const options: Observable<SearchResult> = combineLatest([
       searches,
-      this.incomingDataSources.pipe(filter(ds => !!ds)),
-    ).pipe(
+      this.incomingDataSources.pipe(filter(ds => !!ds))
+    ]).pipe(
       switchMap(([srch, ds]) => {
         // Initial value is sometimes null.
         if (srch === null) {

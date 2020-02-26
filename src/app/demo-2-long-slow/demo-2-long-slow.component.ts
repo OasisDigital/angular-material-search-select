@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Observable, of, throwError as _throw, timer } from 'rxjs';
 import { delayWhen } from 'rxjs/operators';
 
-import { OptionEntry, DataSource } from '../search-select/';
+import { DataSource, OptionEntry } from '../search-select/';
 
 declare global {
   interface Window {
@@ -64,7 +64,7 @@ export class Demo2LongSlowComponent {
             display: company.name
           }));
         return of(result).pipe(
-          delayWhen(_event => timer(Math.random() * 1000 + 400)));
+          delayWhen(event => timer(Math.random() * 1000 + 400)));
       }
     };
     this.dataSource = dataSource;

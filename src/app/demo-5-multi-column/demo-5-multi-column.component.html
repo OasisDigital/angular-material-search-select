@@ -1,31 +1,45 @@
 <h2>Multi Column Search Select</h2>
 
-<p>To go beyond a one-column list and provide a customized drop-down, use the
-base class and write your own control with the correct column set up and
-formatting. This page shows two examples.</p>
+<p>
+  To go beyond a one-column list and provide a customized drop-down,
+  use the base class and write your own control with the correct
+  column set up and formatting. This page shows two examples.
+</p>
 
 <form>
-  <div>Value: {{ { value: companyControl.value } | json }}
-      Touched: {{ companyControl.touched | json }}
-      Errors: {{ companyControl.errors | json }}</div>
+  <div>
+    Value: {{ { value: companyControl.value } | json }} Touched:
+    {{ companyControl.touched | json }} Errors:
+    {{ companyControl.errors | json }}
+  </div>
 
   <div>
-    <input #manual type="text" placeholder="Change Our Value">
-    <button (click)="companyControl.setValue(manual.value)">Set</button>
+    <input #manual type="text" placeholder="Change Our Value" />
+    <button (click)="companyControl.setValue(manual.value)">
+      Set
+    </button>
   </div>
 
   <div class="set-apart">
-    <p>Example 1: Use some CSS to coerce the contents of the auto complete to layhout as a HTML table.</p>
+    <p>
+      Example 1: Use some CSS to coerce the contents of the auto
+      complete to layout as a HTML table.
+    </p>
     <obs-select-company-css-table
       [formControl]="companyControl"
-      [dataSource]="this"></obs-select-company-css-table>
+      [dataSource]="this"
+    ></obs-select-company-css-table>
   </div>
 
   <div class="set-apart">
-      <p>Example 2: Use an Angular Material mat-table inside the drop-down.</p>
-      <obs-select-company-mat-table
+    <p>
+      Example 2: Use an Angular Material mat-table inside the
+      drop-down.
+    </p>
+    <obs-select-company-mat-table
       [formControl]="companyControl"
-      [dataSource]="this"></obs-select-company-mat-table>
+      [dataSource]="this"
+    ></obs-select-company-mat-table>
   </div>
 
   <div style="height: 600px"></div>

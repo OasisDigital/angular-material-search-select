@@ -1,10 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { OptionEntry, DataSource } from '../search-select/';
+import { DataSource, OptionEntry } from '../search-select/';
 
 export interface Employee {
   id: number;

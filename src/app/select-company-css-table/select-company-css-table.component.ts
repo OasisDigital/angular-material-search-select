@@ -1,5 +1,6 @@
-import { Component, forwardRef, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { SearchSelectBase } from '../search-select/';
 
 @Component({

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
-import { OptionEntry, DataSource } from '../search-select/';
+import { DataSource, OptionEntry } from '../search-select/';
 import { Company } from '../types';
 
 declare global {

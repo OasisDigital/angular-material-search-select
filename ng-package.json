@@ -2,7 +2,7 @@
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "lib": {
     "entryFile": "src/app/search-select/index.ts",
-    "externals": {
+    "umdModuleIds": {
       "@angular/material": "ng.material"
     }
   }

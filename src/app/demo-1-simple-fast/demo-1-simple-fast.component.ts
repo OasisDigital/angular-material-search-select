@@ -3,13 +3,12 @@ import { FormControl } from '@angular/forms';
 import { Observable, of, throwError as _throw, timer } from 'rxjs';
 import { delayWhen } from 'rxjs/operators';
 
-// Demo - import directly from sibling code
-import { OptionEntry, DataSource } from '../search-select/';
+import { DataSource, OptionEntry } from '../search-select/';
+import { shortOptions } from '../short-options';
 
+// Demo - import directly from sibling code
 // Real applications:
 // import { OptionEntry, DataSource } from '@oasisdigital/angular-material-search-select/';
-
-import { shortOptions } from '../short-options';
 
 @Component({
   selector: 'obs-demo-1-simple-fast',
@@ -64,7 +63,7 @@ export class Demo1SimpleFastComponent implements DataSource {
     const lowerTerm = typeof term === 'string' ? term.toLowerCase() : '';
     return of(this.options
       .filter(option => option.display.toLowerCase().indexOf(lowerTerm) >= 0)
-    ).pipe(delayWhen(_event =>
+    ).pipe(delayWhen(event =>
       timer(Math.random() * 300 + 100)
     ));
   }

@@ -1,9 +1,9 @@
-import { Component, forwardRef, Input, ViewEncapsulation } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DataSource } from '@angular/cdk/collections';
+import { Component, Input, ViewEncapsulation, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { filter, map } from 'rxjs/operators';
 
-import { SearchSelectBase, OptionEntry } from '../search-select/';
-import { map, filter } from 'rxjs/operators';
+import { OptionEntry, SearchSelectBase } from '../search-select/';
 
 @Component({
   selector: 'obs-select-company-mat-table',
