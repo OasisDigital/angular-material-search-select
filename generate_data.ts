@@ -7,7 +7,10 @@ let companies = [];
 for (let i = 0; i < 10000; i++) {
   companies.push({
     id: i + 1,
-    name: faker.company.companyName() + ' ' + faker.company.companySuffix(),
+    name:
+      faker.company.companyName() +
+      ' ' +
+      faker.company.companySuffix(),
     address: faker.address.streetAddress(),
     city: faker.address.city(),
     state: faker.address.state(),
@@ -30,4 +33,7 @@ const fileContents = `
 window.testData = ${json}
 `;
 
-fs.writeFileSync('src/assets/long-options.js', fileContents);
+fs.writeFileSync(
+  'projects/demo/src/assets/long-options.js',
+  fileContents
+);

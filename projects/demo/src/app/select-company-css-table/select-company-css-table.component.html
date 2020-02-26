@@ -1,0 +1,56 @@
+<mat-form-field class="obs-mat-container" style="width: 600px">
+  <mat-spinner
+    class="obs-mat-spinner"
+    *ngIf="loading | async"
+    [diameter]="20"
+    [strokeWidth]="5"
+  ></mat-spinner>
+  <input
+    type="text"
+    placeholder="Company"
+    attr.aria-label="Company"
+    spellcheck="false"
+    matInput
+    [formControl]="searchControl"
+    #input
+    (blur)="blur()"
+    (focus)="input.select(); focus()"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="displayWith"
+    class="bigger-mat-ac"
+  >
+    <div style="display: table">
+      <mat-option
+        *ngFor="let option of list | async"
+        style="display: table-row-group"
+        [value]="option"
+      >
+        <span
+          style="display: table-cell; width: 150px; padding: 5px"
+          >{{ option.details.name }}</span
+        >
+        <span
+          style="display: table-cell; width: 100px; padding: 5px"
+          >{{ option.details.city }}</span
+        >
+        <span
+          style="display: table-cell; width: 50px; padding: 5px"
+          >{{ option.details.state }}</span
+        >
+      </mat-option>
+    </div>
+  </mat-autocomplete>
+  <b>{{ errorMessage | async }}</b>
+</mat-form-field>
+
+<style>
+  span.mat-option-text {
+    display: table-row !important;
+  }
+  mat-option span {
+    font-size: 14px;
+  }
+</style>

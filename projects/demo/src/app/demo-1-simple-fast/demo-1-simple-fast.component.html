@@ -1,0 +1,33 @@
+<h2>Search-select of a short, fast list</h2>
+
+<p>
+  This example shows the search select with a short, local (and
+  therefore, instantaneous) option list.
+</p>
+
+<form>
+  <div>
+    Value: {{ { value: ours.value } | json }} Touched:
+    {{ ours.touched | json }} Errors: {{ ours.errors | json }}
+  </div>
+
+  <div>
+    <input #manual type="text" placeholder="Change Our Value" />
+    <button (click)="ours.setValue(manual.value)">Set</button>
+  </div>
+
+  <div>
+    <label>
+      <input [formControl]="disableMe" type="checkbox" /> Disable it
+    </label>
+  </div>
+
+  <div class="set-apart">
+    <search-select
+      placeholder="Person"
+      emptyText="(No matches)"
+      [formControl]="ours"
+      [dataSource]="this"
+    ></search-select>
+  </div>
+</form>

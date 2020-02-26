@@ -1,0 +1,31 @@
+<h2>Search select with real (remote) API data</h2>
+
+<p>
+  This demo screen calls a JSON-server API we have hosted on the
+  Internet with proper CORS support. It illustrates how to use the
+  search select with a server-side API.
+</p>
+
+<form>
+  <div>
+    Value: {{ { value: ours.value } | json }} Touched:
+    {{ ours.touched | json }} Errors: {{ ours.errors | json }}
+  </div>
+
+  <div>
+    <input #manual type="text" placeholder="Change Our Value" />
+    <button (click)="ours.setValue(manual.value)">Set</button>
+  </div>
+
+  <div class="set-apart">
+    <search-select
+      placeholder="Company"
+      width="95%"
+      [formControl]="ours"
+      [autoActiveFirstOption]="true"
+      [dataSource]="dataSource"
+    ></search-select>
+  </div>
+
+  <div style="height: 600px"></div>
+</form>

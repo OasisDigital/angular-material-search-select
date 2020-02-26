@@ -1,0 +1,12 @@
+.DS_Store
+.editorconfig
+.git*
+.prettierignore
+*.ico
+*.lock
+*.md
+/angular.json
+/dist
+/node_modules
+/package.json
+long-options.js

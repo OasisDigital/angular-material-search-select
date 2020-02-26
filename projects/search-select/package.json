@@ -1,0 +1,11 @@
+{
+  "name": "@oasisdigital/angular-material-search-select",
+  "version": "0.15.0",
+  "peerDependencies": {
+    "@angular/common": "^9.0.2",
+    "@angular/core": "^9.0.2",
+    "@angular/material": "^9.1.0",
+    "rxjs": "^6.5.4",
+    "tslib": "^1.10.0"
+  }
+}
