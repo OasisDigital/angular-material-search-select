@@ -3,7 +3,10 @@ import { FormControl, Validators } from '@angular/forms';
 import { Observable, of, throwError as _throw, timer } from 'rxjs';
 import { delayWhen } from 'rxjs/operators';
 
-import { DataSource, OptionEntry } from 'search-select';
+import {
+  DataSource,
+  OptionEntry
+} from '@oasisdigital/angular-material-search-select';
 
 declare global {
   interface Window {

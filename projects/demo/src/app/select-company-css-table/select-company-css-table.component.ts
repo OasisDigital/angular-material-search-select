@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { SearchSelectBase } from 'search-select';
+import { SearchSelectBase } from '@oasisdigital/angular-material-search-select';
 
 @Component({
   selector: 'obs-select-company-css-table',

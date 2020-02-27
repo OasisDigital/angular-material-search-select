@@ -3,7 +3,10 @@ import { FormControl } from '@angular/forms';
 import { Observable, of, throwError as _throw, timer } from 'rxjs';
 import { delayWhen } from 'rxjs/operators';
 
-import { DataSource, OptionEntry } from 'search-select';
+import {
+  DataSource,
+  OptionEntry
+} from '@oasisdigital/angular-material-search-select';
 import { shortOptions } from '../short-options';
 
 // Demo - import directly from sibling code

@@ -82,6 +82,11 @@ patterns in use here, and borrow them for other components:
 
 ## Who?
 
-<a href="https://kylecordes.com/">Kyle Cordes</a>, at
+Primary authors:
+
+* Kyle Cordes, twitter `@kylecordes`
+* Paul Spears, twitter `@TheEvergreenDev`
+
+We both work at
 <a href="https://oasisdigital.com/">Oasis Digital</a> /
 <a href="https://angularbootcamp.com/">Angular Boot Camp</a>.

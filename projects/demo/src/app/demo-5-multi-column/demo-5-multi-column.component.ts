@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
-import { DataSource, OptionEntry } from 'search-select';
+import {
+  DataSource,
+  OptionEntry
+} from '@oasisdigital/angular-material-search-select';
 import { Company } from '../types';
 
 declare global {

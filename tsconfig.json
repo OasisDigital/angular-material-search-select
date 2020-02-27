@@ -20,7 +20,7 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"],
     "paths": {
-      "search-select": [
+      "@oasisdigital/angular-material-search-select": [
         "dist/search-select/search-select",
         "dist/search-select"
       ]

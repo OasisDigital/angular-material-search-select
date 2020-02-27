@@ -4,7 +4,10 @@ import { FormControl, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { DataSource, OptionEntry } from 'search-select';
+import {
+  DataSource,
+  OptionEntry
+} from '@oasisdigital/angular-material-search-select';
 
 export interface Employee {
   id: number;
